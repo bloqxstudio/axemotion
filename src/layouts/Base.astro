@@ -1,0 +1,113 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title = 'Axe Motion Automation – Excellence in System Integration and Industrial Automation',
+  description = 'Axe Motion Automation specializes in system integration and control software for industry across Brazil, Germany, USA and Argentina.'
+} = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style is:global>
+    :root {
+      --navy:         #0D1B2A;
+      --navy-mid:     #142236;
+      --blue:         #1C6EE8;
+      --blue-bright:  #4A8FF5;
+      --blue-dim:     rgba(28,110,232,0.12);
+      --white:        #FFFFFF;
+      --black:        #060A0F;
+      --gray-dark:    #8A8F98;
+      --gray-mid:     #C8CDD6;
+      --gray-light:   #F4F5F7;
+      --gray-card:    #ECEEF2;
+      --font:         "Manrope", sans-serif;
+      --mono:         "DM Mono", monospace;
+      --ease-out:     cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background-color: var(--gray-light);
+      color: var(--gray-dark);
+      -webkit-tap-highlight-color: transparent;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: 100%;
+      max-width: 1280px;
+      margin-inline: auto;
+      padding-inline: 80px;
+    }
+
+    .label {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--gray-dark);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1;
+      border-radius: 8px;
+      padding: 16px 32px;
+      cursor: pointer;
+      transition: background 0.22s var(--ease-out), color 0.22s, transform 0.18s var(--ease-out), box-shadow 0.22s;
+      border: 1.5px solid transparent;
+      letter-spacing: 0.01em;
+    }
+    .btn:active { transform: scale(0.97); }
+    .btn-dark { background-color: var(--black); color: var(--white); border-color: var(--black); }
+    .btn-dark:hover { background-color: #1a2636; border-color: #1a2636; box-shadow: 0 4px 20px rgba(0,0,0,0.25); transform: translateY(-1px); }
+    .btn-outline { background-color: transparent; color: var(--navy); border-color: rgba(13,27,42,0.2); }
+    .btn-outline:hover { background-color: var(--navy); color: var(--white); border-color: var(--navy); transform: translateY(-1px); }
+    .btn-ghost { background: transparent; color: var(--navy); border: none; padding: 0; border-radius: 0; gap: 6px; font-size: 14px; font-weight: 700; position: relative; }
+    .btn-ghost::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1.5px; background: var(--navy); transition: width 0.3s var(--ease-out); }
+    .btn-ghost:hover::after { width: 100%; }
+    .btn-ghost svg { transition: transform 0.25s var(--ease-out); }
+    .btn-ghost:hover svg { transform: translateX(4px); }
+
+    /* Global overrides for i18n-injected HTML (Astro scoped CSS won't reach these) */
+    .hero-headline-accent { color: #1A6EE8; display: block; }
+    .about-title em { font-style: normal; color: #1C6EE8; }
+    .image-break-title em { font-style: normal; color: #1C6EE8; }
+
+    /* Fade-in on scroll */
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out); }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .container { padding-inline: 40px; }
+    }
+    @media (max-width: 767px) {
+      .container { padding-inline: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <slot />
+</body>
+</html>

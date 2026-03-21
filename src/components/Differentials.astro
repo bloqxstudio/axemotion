@@ -1,0 +1,78 @@
+---
+const diffs = [
+  {
+    nameKey: 'diff.intl_name',   name: 'International Experience',
+    descKey: 'diff.intl_desc',   desc: 'Proven global know-how in high-complexity projects across multiple countries',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`
+  },
+  {
+    nameKey: 'diff.speed_name',  name: 'Speed & Versatility',
+    descKey: 'diff.speed_desc',  desc: 'Quick learning and mastery of multiple automation platforms',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>`
+  },
+  {
+    nameKey: 'diff.flex_name',   name: 'Total Flexibility',
+    descKey: 'diff.flex_desc',   desc: "Work by the hour, project, or contract — adapting to each client's needs",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12M12 12C12 6 6 2 6 2s6 4 6 10M12 12c0-6 6-10 6-10s-6 4-6 10"/></svg>`
+  },
+  {
+    nameKey: 'diff.agility_name',name: 'Agility in Delivery',
+    descKey: 'diff.agility_desc',desc: 'Fast, practical problem-solving with measurable results',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`
+  },
+  {
+    nameKey: 'diff.integ_name',  name: 'Complete Integration',
+    descKey: 'diff.integ_desc',  desc: 'End-to-end solutions connecting robotics, PLCs, HMIs, and SCADA systems',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="6" height="6" rx="1"/><rect x="16" y="3" width="6" height="6" rx="1"/><rect x="9" y="15" width="6" height="6" rx="1"/><path d="M5 9v3h14V9M12 12v3"/></svg>`
+  },
+  {
+    nameKey: 'diff.commit_name', name: 'Commitment to Results',
+    descKey: 'diff.commit_desc', desc: 'Focused on increasing productivity, quality, and operational efficiency',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>`
+  },
+];
+---
+
+<section class="differentials">
+  <div class="container">
+    <h2 class="diff-title fade-in" data-i18n="diff.title">Our Differentials</h2>
+    <div class="diff-grid">
+      {diffs.map((d, i) => (
+        <div class="diff-card fade-in" style={`transition-delay:${i * 0.05}s`}>
+          <div class="diff-icon" set:html={d.icon}></div>
+          <h3 class="diff-name" data-i18n={d.nameKey}>{d.name}</h3>
+          <p class="diff-desc" data-i18n={d.descKey}>{d.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .differentials { background-color: var(--white); padding: 100px 0; border-top: 1px solid var(--gray-card); }
+
+  .diff-title { font-size: 56px; font-weight: 900; line-height: 1.05; letter-spacing: -2.5px; color: var(--navy); margin-bottom: 52px; }
+
+  .diff-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+  .diff-card {
+    background-color: var(--gray-light); border-radius: 14px;
+    padding: 32px 28px 36px; display: flex; flex-direction: column; gap: 0;
+    transition: transform 0.22s var(--ease-out), box-shadow 0.22s;
+  }
+  .diff-card:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
+
+  .diff-icon { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; color: var(--navy); margin-bottom: 20px; }
+  .diff-icon :global(svg) { width: 28px; height: 28px; }
+
+  .diff-name { font-size: 18px; font-weight: 800; color: var(--navy); letter-spacing: -0.3px; margin-bottom: 12px; }
+
+  .diff-desc { font-size: 15px; font-weight: 500; line-height: 1.6; color: var(--gray-dark); }
+
+  @media (max-width: 1024px) { .diff-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 767px) {
+    .differentials { padding: 60px 0; }
+    .diff-title { font-size: 40px; }
+    .diff-grid { grid-template-columns: 1fr; }
+  }
+</style>

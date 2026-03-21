@@ -1,0 +1,226 @@
+---
+const specialists = [
+  {
+    name: 'Edson Machado',
+    roleKey: 'qc.edson_role', role: 'PLC Specialist',
+    phone: '+5551993187955', phoneDisplay: '+55 (51) 99318-7955',
+    email: 'edsonmachado@axemotionautomation.com',
+  },
+  {
+    name: 'Pedro Sol',
+    roleKey: 'qc.pedro_role', role: 'Robot Specialist',
+    phone: '+5551991988635', phoneDisplay: '+55 (51) 9198-8635',
+    email: 'pedrosol@axemotionautomation.com',
+  },
+];
+---
+
+<!-- FAB Button -->
+<button class="qc-fab" id="qcFab" aria-expanded="false" aria-controls="qcModal" aria-label="Contact Us">
+  <svg class="qc-fab-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+  </svg>
+  <span class="qc-fab-label" data-i18n="qc.fab_label">Contact Us</span>
+</button>
+
+<!-- Modal -->
+<div class="qc-modal" id="qcModal" role="dialog" aria-label="Quick Contact" aria-modal="true" hidden>
+  <div class="qc-header">
+    <span class="qc-header-dot"></span>
+    <span class="qc-header-title" data-i18n="qc.header_title">Quick Contact</span>
+  </div>
+  <div class="qc-body">
+    <p class="qc-section-label" data-i18n="qc.section_label">Talk to a specialist</p>
+    {specialists.map(sp => (
+      <div class="qc-person">
+        <div class="qc-person-info">
+          <p class="qc-person-name">{sp.name}</p>
+          <p class="qc-person-role" data-i18n={sp.roleKey}>{sp.role}</p>
+        </div>
+        <div class="qc-person-actions">
+          <a href={`tel:${sp.phone}`} class="qc-btn qc-btn-phone">{sp.phoneDisplay}</a>
+          <a href={`mailto:${sp.email}`} class="qc-btn qc-btn-email">Email</a>
+        </div>
+      </div>
+    ))}
+    <div class="qc-divider"></div>
+    <a href="#contact" class="qc-form-link" id="qcFormLink">
+      <span data-i18n="qc.form_label">Send a Message</span>
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <path d="M2.5 7H11.5M11.5 7L7.5 3M11.5 7L7.5 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+</div>
+
+<!-- Backdrop -->
+<div class="qc-backdrop" id="qcBackdrop" hidden></div>
+
+<style>
+  .qc-fab {
+    position: fixed;
+    bottom: 32px; right: 32px;
+    z-index: 102;
+    display: flex; align-items: center; gap: 10px;
+    background: var(--blue);
+    color: var(--white);
+    border: none; border-radius: 999px;
+    padding: 14px 22px;
+    font-family: var(--font); font-size: 14px; font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 24px rgba(28,110,232,0.4);
+    transition: background 0.22s, transform 0.22s, box-shadow 0.22s;
+  }
+  .qc-fab:hover { background: var(--blue-bright); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(28,110,232,0.5); }
+  .qc-fab-icon { transition: transform 0.25s var(--ease-out); flex-shrink: 0; }
+  .qc-fab[aria-expanded="true"] .qc-fab-icon { transform: rotate(45deg); }
+
+  .qc-modal {
+    position: fixed;
+    bottom: 96px; right: 32px;
+    z-index: 103;
+    width: 360px;
+    background: var(--white);
+    border-radius: 16px;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.18);
+    overflow: hidden;
+    transform: translateY(16px);
+    opacity: 0;
+    transition: opacity 0.28s var(--ease-out), transform 0.28s var(--ease-out);
+    pointer-events: none;
+  }
+  .qc-modal:not([hidden]) { display: block; }
+  .qc-modal.open { opacity: 1; transform: translateY(0); pointer-events: all; }
+
+  .qc-header {
+    background: var(--navy);
+    display: flex; align-items: center; gap: 10px;
+    padding: 16px 20px;
+  }
+
+  .qc-header-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--blue-bright);
+    box-shadow: 0 0 8px var(--blue-bright);
+    animation: dotPulse 2.2s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+
+  @keyframes dotPulse {
+    0%, 100% { opacity: 0.7; }
+    50%       { opacity: 1; box-shadow: 0 0 14px var(--blue-bright); }
+  }
+
+  .qc-header-title {
+    font-family: var(--mono); font-size: 11px; font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.7);
+  }
+
+  .qc-body { padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+
+  .qc-section-label {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--gray-dark); margin-bottom: 4px;
+  }
+
+  .qc-person {
+    background: var(--gray-light); border-radius: 10px;
+    padding: 16px; display: flex; flex-direction: column; gap: 12px;
+  }
+
+  .qc-person-name { font-size: 15px; font-weight: 800; color: var(--navy); }
+  .qc-person-role { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-dark); margin-top: 2px; }
+
+  .qc-person-actions { display: flex; gap: 8px; }
+
+  .qc-btn {
+    flex: 1; text-align: center;
+    padding: 9px 12px; border-radius: 7px;
+    font-family: var(--font); font-size: 13px; font-weight: 700;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .qc-btn-phone { background: rgba(28,110,232,0.08); color: var(--blue); }
+  .qc-btn-phone:hover { background: var(--blue); color: var(--white); }
+
+  .qc-btn-email { background: rgba(13,27,42,0.06); color: var(--navy); }
+  .qc-btn-email:hover { background: var(--navy); color: var(--white); }
+
+  .qc-divider { height: 1px; background: var(--gray-card); margin: 4px 0; }
+
+  .qc-form-link {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 16px; border-radius: 10px;
+    font-size: 14px; font-weight: 700; color: var(--navy);
+    background: var(--gray-light);
+    transition: background 0.2s;
+  }
+  .qc-form-link:hover { background: var(--gray-card); }
+  .qc-form-link svg { transition: transform 0.2s; }
+  .qc-form-link:hover svg { transform: translateX(3px); }
+
+  .qc-backdrop {
+    position: fixed; inset: 0; z-index: 101;
+    background: rgba(9, 18, 30, 0);
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+    transition: background 0.28s var(--ease-out), backdrop-filter 0.28s var(--ease-out);
+  }
+  .qc-backdrop:not([hidden]) { display: block; }
+  .qc-backdrop.open {
+    background: rgba(9, 18, 30, 0.35);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+
+  @media (max-width: 480px) {
+    .qc-modal { width: calc(100vw - 32px); right: 16px; bottom: 88px; }
+    .qc-fab { right: 16px; bottom: 16px; }
+    .qc-fab-label { display: none; }
+  }
+</style>
+
+<script>
+  const fab      = document.getElementById('qcFab')!;
+  const modal    = document.getElementById('qcModal')!;
+  const backdrop = document.getElementById('qcBackdrop')!;
+  const formLink = document.getElementById('qcFormLink')!;
+
+  function openModal() {
+    modal.hidden = false;
+    backdrop.hidden = false;
+    requestAnimationFrame(() => {
+      modal.classList.add('open');
+      backdrop.classList.add('open');
+    });
+    fab.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    backdrop.classList.remove('open');
+    fab.setAttribute('aria-expanded', 'false');
+    setTimeout(() => {
+      modal.hidden = true;
+      backdrop.hidden = true;
+    }, 280);
+  }
+
+  fab.addEventListener('click', () => {
+    fab.getAttribute('aria-expanded') === 'true' ? closeModal() : openModal();
+  });
+
+  backdrop.addEventListener('click', closeModal);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !modal.hidden) closeModal();
+  });
+
+  formLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    closeModal();
+    setTimeout(() => {
+      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 160);
+  });
+</script>

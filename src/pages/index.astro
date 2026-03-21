@@ -1,0 +1,215 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Services from '../components/Services.astro';
+import Differentials from '../components/Differentials.astro';
+import Contact from '../components/Contact.astro';
+import FloatingNav from '../components/FloatingNav.astro';
+import QuickContact from '../components/QuickContact.astro';
+---
+
+<Base>
+  <FloatingNav />
+  <Hero />
+  <About />
+  <Services />
+  <Differentials />
+  <Contact />
+  <QuickContact />
+
+  <!-- i18n engine + fade-in observer -->
+  <script is:inline>
+  (function () {
+    var TRANSLATIONS = {
+      en: {
+        'meta.title':        'Axe Motion Automation – Excellence in System Integration and Industrial Automation',
+        'meta.description':  'Axe Motion Automation specializes in system integration and control software for industry across Brazil, Germany, USA and Argentina.',
+        'aria.site_nav':     'Site navigation', 'aria.nav_dialog': 'Navigation menu',
+        'aria.burger_label': 'Toggle menu', 'aria.qc_dialog': 'Quick Contact',
+        'alt.logo':          'Axe Motion Automation', 'alt.footer_logo': 'Axe Motion Automation',
+        'alt.carousel_system':'Industrial automation facility','alt.carousel_robot':'Industrial robot',
+        'alt.carousel_control':'Control panel','alt.carousel_circuit':'Circuit board',
+        'alt.carousel_welding':'Industrial welding robot','alt.carousel_production':'Factory production line',
+        'alt.carousel_sensors':'Sensor technology','alt.image_break':'Industrial circuit board — built for complexity',
+        'nav.services':'Services','nav.about':'About','nav.projects':'Projects','nav.contact':'Contact',
+        'hero.eyebrow':'Industrial Automation · System Integration',
+        'hero.headline_html':'Excellence in<br><span class="hero-headline-accent">Automation</span>',
+        'hero.subheadline_html':'From robot programming to full cell integration, we engineer automation that <strong>cuts downtime, reduces error, and scales with your operation</strong> — without disrupting your current production.',
+        'hero.cta_primary':'Talk to Us','hero.cta_secondary':'Our Services','hero.scroll':'Scroll to explore',
+        'about.label':'Who We Are',
+        'about.title_html':'We Work<br>With <em>Industry</em>',
+        'about.description':'Axe Motion Automation specializes in system integration and control software for industry. We transform industrial processes into more efficient, safe, and productive operations through robot programming, automated cell integration, and complete automation solutions.',
+        'about.countries_label':'Operating in','about.country_brazil':'Brazil','about.country_germany':'Germany',
+        'about.country_usa':'United States','about.country_argentina':'Argentina',
+        'carousel.system':'System Integration','carousel.robotics':'Robotics','carousel.plc':'PLC & Control',
+        'carousel.electronics':'Electronics','carousel.welding':'Welding Automation',
+        'carousel.production':'Production Lines','carousel.sensors':'Sensors & IoT',
+        'services.title_html':'What<br>We Do',
+        'services.robotics_name':'Industrial Robotics',
+        'services.robotics_i1':'Programming FANUC, KUKA, YASKAWA, DENSO, UR, OMRON',
+        'services.robotics_i2':'Integration & Commissioning','services.robotics_i3':'Cycle Optimization',
+        'services.plc_name':'PLCs & Control',
+        'services.plc_i1':'Rockwell, Siemens, Schneider, Omron, Mitsubishi, Altus, Delta',
+        'services.plc_i2':'Programming and Optimization','services.plc_i3':'Motion Control',
+        'services.hmi_name':'HMI & SCADA','services.hmi_i1':'Interface Development',
+        'services.hmi_i2':'FactoryTalk, Ignition, Elipse','services.hmi_i3':'MES/ERP Integration',
+        'services.hmi_i4':'Full Customization','services.vision_name':'Vision System',
+        'services.vision_i1':'Cognex, Matrox, Keyence','services.vision_i2':'FANUC iR Vision',
+        'services.vision_i3':'Inspection Systems','services.vision_i4':'Quality Control',
+        'imagebreak.eyebrow':'Proven Expertise',
+        'imagebreak.title_html':'Built for<br><em>Complexity</em>',
+        'imagebreak.text':'From initial programming to production cycle optimization — we deliver measurable results in the most demanding industrial environments.',
+        'diff.title':'Our Differentials',
+        'diff.intl_name':'International Experience','diff.intl_desc':'Proven global know-how in high-complexity projects across multiple countries',
+        'diff.speed_name':'Speed & Versatility','diff.speed_desc':'Quick learning and mastery of multiple automation platforms',
+        'diff.flex_name':'Total Flexibility','diff.flex_desc':"Work by the hour, project, or contract — adapting to each client's needs",
+        'diff.agility_name':'Agility in Delivery','diff.agility_desc':'Fast, practical problem-solving with measurable results',
+        'diff.integ_name':'Complete Integration','diff.integ_desc':'End-to-end solutions connecting robotics, PLCs, HMIs, and SCADA systems',
+        'diff.commit_name':'Commitment to Results','diff.commit_desc':'Focused on increasing productivity, quality, and operational efficiency',
+        'contact.title_html':'Contact<br>Us','contact.sub':"Ready to automate? Let's talk about your project and how we can help.",
+        'contact.edson_role':'PLC Specialist','contact.pedro_role':'Robot Specialist',
+        'contact.form_heading':'Send Message','contact.form_name':'Name Surname',
+        'contact.form_company':'Company Name','contact.form_phone':'Your Phone',
+        'contact.form_email':'Email','contact.form_message':'Your Message','contact.form_submit':'Send Message',
+        'qc.header_title':'Quick Contact','qc.section_label':'Talk to a specialist',
+        'qc.edson_role':'PLC Specialist','qc.pedro_role':'Robot Specialist',
+        'qc.form_label':'Send a Message','qc.form_desc':'Fill out the contact form','qc.fab_label':'Contact Us',
+        'footer.copy':'© 2025 Axe Motion Automation. All rights reserved.',
+        'contact.form_success': '✓ Message sent! We\'ll be in touch soon.',
+        'contact.form_error':   '✗ Something went wrong. Please try again.',
+        'contact.form_sending': '...',
+      },
+      'pt-BR': {
+        'meta.title':'Axe Motion Automation – Excelência em Integração de Sistemas e Automação Industrial',
+        'meta.description':'A Axe Motion Automation é especialista em integração de sistemas e software de controle para a indústria no Brasil, Alemanha, EUA e Argentina.',
+        'aria.site_nav':'Navegação do site','aria.nav_dialog':'Menu de navegação',
+        'aria.burger_label':'Abrir menu','aria.qc_dialog':'Contato Rápido',
+        'alt.logo':'Axe Motion Automation','alt.footer_logo':'Axe Motion Automation',
+        'alt.carousel_system':'Instalação de automação industrial','alt.carousel_robot':'Robô industrial',
+        'alt.carousel_control':'Painel de controle','alt.carousel_circuit':'Placa de circuito',
+        'alt.carousel_welding':'Robô industrial de soldagem','alt.carousel_production':'Linha de produção fabril',
+        'alt.carousel_sensors':'Tecnologia de sensores','alt.image_break':'Placa de circuito industrial — construída para complexidade',
+        'nav.services':'Serviços','nav.about':'Sobre','nav.projects':'Projetos','nav.contact':'Contato',
+        'hero.eyebrow':'Automação Industrial · Integração de Sistemas',
+        'hero.headline_html':'Excelência em<br><span class="hero-headline-accent">Automação</span>',
+        'hero.subheadline_html':'Da programação de robôs à integração completa de células, desenvolvemos automações que <strong>reduzem paradas, eliminam erros e escalam com a sua operação</strong> — sem interromper a produção atual.',
+        'hero.cta_primary':'Fale Conosco','hero.cta_secondary':'Nossos Serviços','hero.scroll':'Role para explorar',
+        'about.label':'Quem Somos',
+        'about.title_html':'Trabalhamos<br>Com a <em>Indústria</em>',
+        'about.description':'A Axe Motion Automation é especialista em integração de sistemas e software de controle para a indústria. Transformamos processos industriais em operações mais eficientes, seguras e produtivas por meio de programação de robôs, integração de células automatizadas e soluções completas de automação.',
+        'about.countries_label':'Atuando em','about.country_brazil':'Brasil','about.country_germany':'Alemanha',
+        'about.country_usa':'Estados Unidos','about.country_argentina':'Argentina',
+        'carousel.system':'Integração de Sistemas','carousel.robotics':'Robótica','carousel.plc':'CLP & Controle',
+        'carousel.electronics':'Eletrônica','carousel.welding':'Soldagem Automatizada',
+        'carousel.production':'Linhas de Produção','carousel.sensors':'Sensores & IoT',
+        'services.title_html':'O Que<br>Fazemos',
+        'services.robotics_name':'Robótica Industrial',
+        'services.robotics_i1':'Programação FANUC, KUKA, YASKAWA, DENSO, UR, OMRON',
+        'services.robotics_i2':'Integração & Comissionamento','services.robotics_i3':'Otimização de Ciclos',
+        'services.plc_name':'CLPs & Controle',
+        'services.plc_i1':'Rockwell, Siemens, Schneider, Omron, Mitsubishi, Altus, Delta',
+        'services.plc_i2':'Programação e Otimização','services.plc_i3':'Controle de Movimento',
+        'services.hmi_name':'IHM & SCADA','services.hmi_i1':'Desenvolvimento de Interfaces',
+        'services.hmi_i2':'FactoryTalk, Ignition, Elipse','services.hmi_i3':'Integração MES/ERP',
+        'services.hmi_i4':'Personalização Completa','services.vision_name':'Sistema de Visão',
+        'services.vision_i1':'Cognex, Matrox, Keyence','services.vision_i2':'FANUC iR Vision',
+        'services.vision_i3':'Sistemas de Inspeção','services.vision_i4':'Controle de Qualidade',
+        'imagebreak.eyebrow':'Expertise Comprovada',
+        'imagebreak.title_html':'Feito para<br><em>Complexidade</em>',
+        'imagebreak.text':'Da programação inicial à otimização de ciclos de produção — entregamos resultados mensuráveis nos ambientes industriais mais exigentes.',
+        'diff.title':'Nossos Diferenciais',
+        'diff.intl_name':'Experiência Internacional','diff.intl_desc':'Know-how global comprovado em projetos de alta complexidade em múltiplos países',
+        'diff.speed_name':'Velocidade & Versatilidade','diff.speed_desc':'Aprendizado rápido e domínio de múltiplas plataformas de automação',
+        'diff.flex_name':'Flexibilidade Total','diff.flex_desc':'Trabalhamos por hora, projeto ou contrato — adaptando-nos às necessidades de cada cliente',
+        'diff.agility_name':'Agilidade na Entrega','diff.agility_desc':'Resolução de problemas rápida e prática com resultados mensuráveis',
+        'diff.integ_name':'Integração Completa','diff.integ_desc':'Soluções end-to-end conectando robótica, CLPs, IHMs e sistemas SCADA',
+        'diff.commit_name':'Compromisso com Resultados','diff.commit_desc':'Focados em aumentar produtividade, qualidade e eficiência operacional',
+        'contact.title_html':'Fale<br>Conosco','contact.sub':'Pronto para automatizar? Vamos conversar sobre seu projeto e como podemos ajudar.',
+        'contact.edson_role':'Especialista em CLP','contact.pedro_role':'Especialista em Robótica',
+        'contact.form_heading':'Enviar Mensagem','contact.form_name':'Nome Sobrenome',
+        'contact.form_company':'Nome da Empresa','contact.form_phone':'Seu Telefone',
+        'contact.form_email':'E-mail','contact.form_message':'Sua Mensagem','contact.form_submit':'Enviar Mensagem',
+        'qc.header_title':'Contato Rápido','qc.section_label':'Fale com um especialista',
+        'qc.edson_role':'Especialista em CLP','qc.pedro_role':'Especialista em Robótica',
+        'qc.form_label':'Enviar uma Mensagem','qc.form_desc':'Preencha o formulário de contato','qc.fab_label':'Fale Conosco',
+        'footer.copy':'© 2025 Axe Motion Automation. Todos os direitos reservados.',
+        'contact.form_success': '✓ Mensagem enviada! Entraremos em contato em breve.',
+        'contact.form_error':   '✗ Algo deu errado. Por favor, tente novamente.',
+        'contact.form_sending': '...',
+      }
+    };
+
+    var SUPPORTED = ['en', 'pt-BR'];
+    var DEFAULT_LANG = 'en';
+
+    function detectLang() {
+      var stored = localStorage.getItem('axe_lang');
+      if (stored && SUPPORTED.indexOf(stored) !== -1) return stored;
+      var browser = (navigator.language || '').substring(0, 5);
+      if (SUPPORTED.indexOf(browser) !== -1) return browser;
+      var short = browser.substring(0, 2);
+      for (var i = 0; i < SUPPORTED.length; i++) {
+        if (SUPPORTED[i].indexOf(short) === 0) return SUPPORTED[i];
+      }
+      return DEFAULT_LANG;
+    }
+
+    function applyLang(lang) {
+      var dict = TRANSLATIONS[lang] || TRANSLATIONS[DEFAULT_LANG];
+      document.querySelectorAll('[data-i18n]').forEach(function(el) {
+        var val = dict[el.dataset.i18n]; if (val !== undefined) el.textContent = val;
+      });
+      document.querySelectorAll('[data-i18n-html]').forEach(function(el) {
+        var val = dict[el.dataset.i18nHtml]; if (val !== undefined) el.innerHTML = val;
+      });
+      document.querySelectorAll('[data-i18n-attr]').forEach(function(el) {
+        el.dataset.i18nAttr.split(',').forEach(function(pair) {
+          var parts = pair.trim().split(':');
+          var attr = parts[0].trim(); var key = parts[1].trim();
+          var val = dict[key]; if (val !== undefined) el.setAttribute(attr, val);
+        });
+      });
+      document.documentElement.lang = lang;
+      if (dict['meta.title']) document.title = dict['meta.title'];
+      var metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc && dict['meta.description']) metaDesc.setAttribute('content', dict['meta.description']);
+      localStorage.setItem('axe_lang', lang);
+      document.documentElement.dataset.lang = lang;
+    }
+
+    window.AxeI18nDict = TRANSLATIONS;
+    window.AxeI18n = {
+      setLang: function(lang) {
+        if (SUPPORTED.indexOf(lang) === -1) return;
+        applyLang(lang);
+        document.querySelectorAll('[data-lang-btn]').forEach(function(btn) {
+          var active = btn.dataset.langBtn === lang;
+          btn.classList.toggle('is-active', active);
+          btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+        });
+      },
+      current: function() { return document.documentElement.dataset.lang || DEFAULT_LANG; }
+    };
+
+    document.addEventListener('DOMContentLoaded', function() {
+      var lang = detectLang();
+      applyLang(lang);
+      document.querySelectorAll('[data-lang-btn]').forEach(function(btn) {
+        btn.addEventListener('click', function() { window.AxeI18n.setLang(this.dataset.langBtn); });
+        var active = btn.dataset.langBtn === lang;
+        btn.classList.toggle('is-active', active);
+        btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+
+      // Fade-in on scroll
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+        });
+      }, { rootMargin: '0px 0px -50px 0px' });
+      document.querySelectorAll('.fade-in').forEach(function(el) { io.observe(el); });
+    });
+  })();
+  </script>
+</Base>
