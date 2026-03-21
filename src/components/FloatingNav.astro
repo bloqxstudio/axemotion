@@ -11,7 +11,7 @@
       <a href="#about"    data-i18n="nav.about">About</a>
       <a href="#contact"  data-i18n="nav.contact">Contact</a>
     </nav>
-    <a href="#contact" class="btn btn-dark float-nav-cta" data-i18n="nav.contact">Contact</a>
+    <a href="#contact" class="btn btn-hero-primary float-nav-cta" data-i18n="nav.contact">Contact</a>
 
     <!-- Hamburger (mobile) -->
     <button class="burger" id="burger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
@@ -76,7 +76,31 @@
   }
   .float-nav-links a:hover { color: rgba(255,255,255,0.9); }
 
-  .float-nav-cta { padding: 10px 20px; font-size: 13px; }
+  .btn-hero-primary {
+    background: var(--blue);
+    color: var(--white);
+    border: 1.5px solid var(--blue);
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: all 0.22s var(--ease-out);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+  }
+  .btn-hero-primary:hover {
+    background: var(--blue-bright);
+    border-color: var(--blue-bright);
+    box-shadow: 0 0 0 4px rgba(28,110,232,0.2), 0 10px 28px rgba(28,110,232,0.35);
+    transform: translateY(-1px);
+  }
+
+  .float-nav-cta { }
 
   /* Burger */
   .burger {

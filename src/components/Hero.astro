@@ -64,6 +64,7 @@ import Navbar from './Navbar.astro';
     background-image: url("/assets/world-map-1.svg");
     background-size: 110%;
     background-position: center 40%;
+    background-repeat: no-repeat;
     animation: mapDrift 28s ease-in-out infinite;
     will-change: background-position, transform;
   }
@@ -74,6 +75,13 @@ import Navbar from './Navbar.astro';
     50%  { background-position: 50% 44%; transform: scale(1.04); }
     75%  { background-position: 47% 40%; transform: scale(1.02); }
     100% { background-position: 48% 38%; transform: scale(1); }
+  }
+
+  @media (max-width: 767px) {
+    .hero-map {
+      background-size: cover;
+      background-position: 60% center;
+    }
   }
 
   .hero-map-overlay {
@@ -272,9 +280,11 @@ import Navbar from './Navbar.astro';
   }
 
   @media (max-width: 767px) {
-    .hero-main { padding: 0 24px; padding-top: 40px; }
+    .hero-main { padding: 0 24px; padding-top: 0; justify-content: center; }
+    .hero-eyebrow { margin-bottom: 12px; }
     .hero-subheadline { max-width: 100%; }
-    .hero-sub-row { flex-direction: column; align-items: flex-start; gap: 24px; padding-bottom: 60px; }
+    .hero-head-row { gap: 10px; }
+    .hero-sub-row { flex-direction: column; align-items: flex-start; gap: 20px; padding-bottom: 40px; margin-top: 16px; border-top: none; }
     .hero-scroll { display: none; }
   }
 </style>

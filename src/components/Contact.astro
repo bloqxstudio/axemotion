@@ -1,18 +1,15 @@
 ---
 const specialists = [
   {
-    name: 'Edson Machado',
     roleKey: 'contact.edson_role', role: 'PLC Specialist',
-    phone: '+5551993187955', phoneDisplay: '+55 (51) 99318-7955',
     email: 'edsonmachado@axemotionautomation.com',
   },
   {
-    name: 'Pedro Sol',
     roleKey: 'contact.pedro_role', role: 'Robot Specialist',
-    phone: '+5551991988635', phoneDisplay: '+55 (51) 9198-8635',
     email: 'pedrosol@axemotionautomation.com',
   },
 ];
+
 ---
 
 <section class="contact-us" id="contact">
@@ -29,14 +26,8 @@ const specialists = [
       <div class="contact-persons fade-in">
         {specialists.map(sp => (
           <div class="contact-person">
-            <div class="contact-person-info">
-              <p class="contact-person-name">{sp.name}</p>
-              <p class="contact-person-role" data-i18n={sp.roleKey}>{sp.role}</p>
-            </div>
-            <div class="contact-person-links">
-              <a href={`tel:${sp.phone}`} class="contact-person-phone">{sp.phoneDisplay}</a>
-              <a href={`mailto:${sp.email}`} class="contact-person-email">{sp.email}</a>
-            </div>
+            <p class="contact-person-role" data-i18n={sp.roleKey}>{sp.role}</p>
+            <a href={`mailto:${sp.email}`} class="contact-person-email">{sp.email}</a>
           </div>
         ))}
       </div>
@@ -59,7 +50,7 @@ const specialists = [
           <textarea name="message" rows="5" placeholder="Your Message" data-i18n-attr="placeholder:contact.form_message"></textarea>
 
           <div class="form-footer">
-            <button type="submit" class="btn btn-dark" id="contactSubmit" data-i18n="contact.form_submit">Send Message</button>
+            <button type="submit" class="contact-submit-btn" id="contactSubmit" data-i18n="contact.form_submit">Send Message</button>
             <div class="form-feedback" id="formFeedback" hidden></div>
           </div>
         </form>
@@ -107,6 +98,7 @@ const specialists = [
       btn.textContent = t('contact.form_submit');
     }
   });
+
 </script>
 
 <style>
@@ -139,24 +131,21 @@ const specialists = [
     background: var(--white);
     border: 1px solid var(--gray-card);
     border-radius: 14px;
-    padding: 28px;
+    padding: 24px 28px;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 10px;
   }
 
-  .contact-person-name { font-size: 17px; font-weight: 800; color: var(--navy); letter-spacing: -0.3px; }
-  .contact-person-role { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-dark); margin-top: 4px; }
+  .contact-person-role {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.13em;
+    text-transform: uppercase; color: var(--navy); font-weight: 700;
+  }
 
-  .contact-person-links { display: flex; flex-direction: column; gap: 8px; }
-
-  .contact-person-phone,
   .contact-person-email {
-    font-size: 14px; font-weight: 600; color: var(--navy);
-    display: flex; align-items: center; gap: 8px;
+    font-size: 14px; font-weight: 500; color: var(--gray-dark);
     transition: color 0.2s;
   }
-  .contact-person-phone:hover,
   .contact-person-email:hover { color: var(--blue); }
 
   /* Form */
@@ -196,8 +185,31 @@ const specialists = [
 
   .form-footer { display: flex; align-items: center; gap: 16px; margin-top: 8px; flex-wrap: wrap; }
 
-  .contact-form .btn { flex-shrink: 0; }
-  .contact-form .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+  .contact-submit-btn {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--blue);
+    color: var(--white);
+    border: 1.5px solid var(--blue);
+    padding: 15px 32px;
+    border-radius: 8px;
+    font-family: var(--font);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    transition: all 0.22s var(--ease-out);
+  }
+  .contact-submit-btn:hover {
+    background: var(--blue-bright);
+    border-color: var(--blue-bright);
+    box-shadow: 0 0 0 4px rgba(28,110,232,0.2), 0 10px 28px rgba(28,110,232,0.35);
+    transform: translateY(-1px);
+  }
+  .contact-submit-btn:active { transform: scale(0.97); }
+  .contact-submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none; }
 
   .form-feedback {
     font-size: 14px; font-weight: 600;
@@ -218,12 +230,9 @@ const specialists = [
   }
 
   @media (max-width: 767px) {
+    .contact-us { padding: 60px 0; }
     .contact-us-header { margin-bottom: 36px; }
     .contact-us-sub { max-width: 100%; }
-  }
-
-  @media (max-width: 767px) {
-    .contact-us { padding: 60px 0; }
     .form-row { grid-template-columns: 1fr; }
     .contact-form-wrap { padding: 24px; }
   }
