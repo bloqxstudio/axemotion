@@ -69,8 +69,8 @@ const carouselImages = [
 
   .about-top {
     display: grid;
-    grid-template-columns: 1fr 2fr;
-    column-gap: 64px;
+    grid-template-columns: minmax(340px, 2fr) 3fr;
+    column-gap: 96px;
     row-gap: 60px;
     padding-bottom: 0;
   }
@@ -78,14 +78,14 @@ const carouselImages = [
   .about-left { display: flex; flex-direction: column; gap: 28px; }
 
   .about-title {
-    font-size: 56px; font-weight: 800; line-height: 1.05;
-    letter-spacing: -2.5px; color: var(--navy);
+    font-size: clamp(36px, 3.8vw, 56px); font-weight: 800; line-height: 1.05;
+    letter-spacing: -0.04em; color: var(--navy);
   }
   .about-title em { font-style: normal; color: var(--blue); }
 
-  .about-right { display: flex; flex-direction: column; justify-content: flex-end; gap: 32px; padding-top: 56px; }
+  .about-right { display: flex; flex-direction: column; justify-content: flex-end; gap: 32px; padding-top: 64px; }
 
-  .about-description { font-size: 17px; font-weight: 500; line-height: 1.7; color: var(--gray-dark); max-width: 560px; }
+  .about-description { font-size: 17px; font-weight: 500; line-height: 1.8; color: var(--gray-dark); max-width: 560px; }
 
   .about-carousel-scroll { position: relative; height: 560px; margin-top: 60px; overflow: hidden; }
 
@@ -142,7 +142,6 @@ const carouselImages = [
 
   @media (max-width: 767px) {
     .about { padding: 60px 0 0; }
-    .about-title { font-size: 40px; letter-spacing: -1.5px; }
     .about-carousel-scroll { height: 280px; }
   }
 </style>

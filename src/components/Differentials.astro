@@ -51,7 +51,7 @@ const diffs = [
 <style>
   .differentials { background-color: var(--white); padding: 100px 0; border-top: 1px solid var(--gray-card); }
 
-  .diff-title { font-size: 56px; font-weight: 900; line-height: 1.05; letter-spacing: -2.5px; color: var(--navy); margin-bottom: 52px; }
+  .diff-title { font-size: clamp(36px, 4.5vw, 56px); font-weight: 900; line-height: 1.05; letter-spacing: -0.04em; color: var(--navy); margin-bottom: 52px; }
 
   .diff-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 
@@ -72,7 +72,6 @@ const diffs = [
   @media (max-width: 1024px) { .diff-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 767px) {
     .differentials { padding: 60px 0; }
-    .diff-title { font-size: 40px; }
     .diff-grid { grid-template-columns: 1fr; }
   }
 </style>

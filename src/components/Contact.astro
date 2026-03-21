@@ -122,11 +122,12 @@ const specialists = [
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
-    gap: 40px;
+    gap: 32px;
     margin-bottom: 64px;
+    flex-wrap: wrap;
   }
 
-  .contact-us-title { font-size: 72px; font-weight: 900; line-height: 1; letter-spacing: -3.5px; color: var(--navy); }
+  .contact-us-title { font-size: clamp(44px, 5.5vw, 72px); font-weight: 900; line-height: 1; letter-spacing: -0.045em; color: var(--navy); }
 
   .contact-us-sub { font-size: 15px; font-weight: 500; line-height: 1.7; color: var(--gray-dark); max-width: 360px; }
 
@@ -213,12 +214,16 @@ const specialists = [
 
   @media (max-width: 1024px) {
     .contact-us-body { grid-template-columns: 1fr; }
-    .contact-us-header { flex-direction: column; align-items: flex-start; }
+    .contact-us-header { align-items: flex-start; margin-bottom: 48px; }
+  }
+
+  @media (max-width: 767px) {
+    .contact-us-header { margin-bottom: 36px; }
+    .contact-us-sub { max-width: 100%; }
   }
 
   @media (max-width: 767px) {
     .contact-us { padding: 60px 0; }
-    .contact-us-title { font-size: 48px; }
     .form-row { grid-template-columns: 1fr; }
     .contact-form-wrap { padding: 24px; }
   }

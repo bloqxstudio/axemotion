@@ -149,12 +149,14 @@ import Navbar from './Navbar.astro';
 
   .hero-headline {
     font-family: var(--font);
-    font-size: clamp(52px, 7.5vw, 118px);
+    font-size: clamp(48px, 6vw, 118px);
     font-weight: 900;
     line-height: 1.0;
-    letter-spacing: -3px;
+    letter-spacing: -0.025em;
     color: var(--white);
     margin-bottom: 0;
+    min-width: 0;
+    flex: 1;
   }
 
 @keyframes heroFadeUp {
@@ -170,7 +172,7 @@ import Navbar from './Navbar.astro';
     animation: heroFadeUp 1s 0.42s var(--ease-out) both;
   }
 
-  .hero-subheadline { max-width: 360px; flex-shrink: 0; padding-bottom: 6px; }
+  .hero-subheadline { max-width: 360px; flex-shrink: 0; padding-bottom: 6px; min-width: 0; }
   .hero-subheadline p { font-size: 15px; font-weight: 500; line-height: 1.72; color: rgba(255,255,255,0.44); }
   .hero-subheadline p strong { font-weight: 700; color: rgba(255,255,255,0.72); }
 
@@ -258,14 +260,20 @@ import Navbar from './Navbar.astro';
     100% { left: 100%; }
   }
 
+  @media (max-width: 1200px) {
+    .hero-head-row { flex-direction: column; align-items: flex-start; gap: 20px; }
+    .hero-subheadline { max-width: 560px; }
+  }
+
   @media (max-width: 1024px) {
     .hero-main { padding: 0 40px; padding-top: 60px; }
-    .hero-head-row { flex-direction: column; align-items: flex-start; gap: 24px; }
+    .hero-sub-row { padding-bottom: 72px; }
     .hero-trust { display: none; }
   }
 
   @media (max-width: 767px) {
     .hero-main { padding: 0 24px; padding-top: 40px; }
+    .hero-subheadline { max-width: 100%; }
     .hero-sub-row { flex-direction: column; align-items: flex-start; gap: 24px; padding-bottom: 60px; }
     .hero-scroll { display: none; }
   }
