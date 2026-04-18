@@ -1,0 +1,200 @@
+---
+interface Props {
+  links?: {
+    linkedin?: string;
+    instagram?: string;
+  };
+  logoSrc?: string;
+  logoAlt?: string;
+}
+
+const {
+  links = {
+    linkedin: "#",
+    instagram: "#",
+  },
+  logoSrc = "/assets/logo.svg",
+  logoAlt = "Axemotion",
+} = Astro.props;
+---
+
+<section class="social-bar" id="social-bar-footer">
+  <div class="social-bar__inner">
+
+    <nav class="social-bar__links" aria-label="Social media links">
+      {links.linkedin && (
+        <a href={links.linkedin} target="_blank" rel="noopener noreferrer" class="social-bar__link">
+          <span class="link-line"></span>
+          LINKEDIN
+        </a>
+      )}
+      {links.instagram && (
+        <a href={links.instagram} target="_blank" rel="noopener noreferrer" class="social-bar__link">
+          <span class="link-line"></span>
+          INSTAGRAM
+        </a>
+      )}
+    </nav>
+
+    <div class="social-bar__logo">
+      <img
+        src={logoSrc}
+        alt={logoAlt}
+        loading="eager"
+      />
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .social-bar {
+    background-color: var(--navy);
+    padding: 100px 80px;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    overflow: hidden;
+  }
+
+  /* Accent glow top edge — matches hero scanline */
+  .social-bar::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      var(--blue) 25%,
+      var(--blue-bright) 50%,
+      var(--blue) 75%,
+      transparent 100%
+    );
+    opacity: 0.35;
+  }
+
+  .social-bar__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+    max-width: 1280px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  /* ── Social links ── */
+  .social-bar__links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+  }
+
+  .social-bar__link {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.35);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: color 0.25s var(--ease-out);
+  }
+
+  .link-line {
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.18);
+    transition: width 0.3s var(--ease-out), background 0.3s;
+    flex-shrink: 0;
+  }
+
+  .social-bar__link:hover {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .social-bar__link:hover .link-line {
+    width: 44px;
+    background: var(--blue-bright);
+  }
+
+  /* ── Logo: full-width, ultra-transparent ── */
+  .social-bar__logo {
+    width: 100%;
+  }
+
+  .social-bar__logo img {
+    width: 100%;
+    height: auto;
+    display: block;
+    user-select: none;
+    -webkit-user-drag: none;
+    pointer-events: none;
+    /* Craft transparency: barely visible, ghost-like */
+    opacity: 0.07;
+    /* Desaturate + lighten to blend with navy bg */
+    filter: brightness(3) grayscale(0.4);
+    /* Subtle fade at edges */
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 8%,
+      black 92%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 8%,
+      black 92%,
+      transparent 100%
+    );
+    transition: opacity 0.6s ease;
+  }
+
+  .social-bar:hover .social-bar__logo img {
+    opacity: 0.11;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 1024px) {
+    .social-bar {
+      padding: 80px 40px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .social-bar {
+      padding: 72px 24px;
+    }
+
+    .social-bar__inner {
+      gap: 48px;
+    }
+
+    .social-bar__links {
+      gap: 28px;
+    }
+  }
+</style>
+
+<script>
+  function syncFooterHeight() {
+    const footer = document.getElementById('social-bar-footer');
+    if (!footer) return;
+    document.body.style.paddingBottom = footer.offsetHeight + 'px';
+  }
+
+  syncFooterHeight();
+  window.addEventListener('resize', syncFooterHeight);
+</script>

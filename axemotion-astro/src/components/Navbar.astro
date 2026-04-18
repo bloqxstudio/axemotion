@@ -1,0 +1,139 @@
+---
+// Hero nav (inside hero section) + language pill
+---
+
+<!-- Language Pill -->
+<div class="lang-pill">
+  <button data-lang-btn="en" aria-pressed="true">🇺🇸</button>
+  <button data-lang-btn="pt-BR" aria-pressed="false">🇧🇷</button>
+</div>
+
+<!-- Hero Nav -->
+<nav class="hero-nav" aria-label="Site navigation">
+  <div class="hero-nav-logo">
+    <a href="/">
+      <img src="/assets/logo-alt.svg" alt="Axe Motion Automation" data-i18n-attr="alt:alt.logo" />
+    </a>
+  </div>
+  <div class="hero-nav-links">
+    <a href="#services" data-i18n="nav.services">Services</a>
+    <a href="#about" data-i18n="nav.about">About</a>
+    <a href="#contact" data-i18n="nav.contact">Contact</a>
+    <div class="hero-nav-sep"></div>
+    <a href="#contact" class="hero-nav-cta" data-i18n="nav.contact">Contact</a>
+  </div>
+</nav>
+
+<style>
+  .lang-pill {
+    position: fixed;
+    top: 20px;
+    right: 24px;
+    z-index: 200;
+    display: flex;
+    gap: 4px;
+    background: rgba(13,27,42,0.7);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 999px;
+    padding: 4px;
+    backdrop-filter: blur(12px);
+  }
+
+  .lang-pill button {
+    background: transparent;
+    border: none;
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.18s;
+    line-height: 1;
+  }
+
+  .lang-pill button.is-active,
+  .lang-pill button:hover {
+    background: rgba(255,255,255,0.12);
+  }
+
+  @media (max-width: 767px) {
+    .lang-pill { display: none; }
+  }
+
+  .hero-nav {
+    position: relative;
+    z-index: 10;
+    padding: 36px 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    animation: navFadeIn 0.9s var(--ease-out) both;
+    max-width: 1280px;
+    width: 100%;
+    margin-inline: auto;
+  }
+
+  @keyframes navFadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-nav-logo { width: 120px; }
+
+  @media (max-width: 767px) {
+    .hero-nav-logo { width: 90px; }
+  }
+  .hero-nav-logo img {
+    width: 100%;
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(-4px);
+    animation: logoReveal 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+  }
+
+  @keyframes logoReveal {
+    0%   { opacity: 0; filter: blur(12px); transform: translateY(-6px); }
+    60%  { opacity: 0.9; filter: blur(1px);  transform: translateY(0); }
+    100% { opacity: 1;  filter: blur(0px);  transform: translateY(0); }
+  }
+
+  .hero-nav-links {
+    display: flex;
+    gap: 36px;
+    align-items: center;
+  }
+
+  .hero-nav-links a {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    transition: color 0.2s;
+  }
+  .hero-nav-links a:hover { color: rgba(255,255,255,0.9); }
+
+  .hero-nav-sep {
+    width: 1px;
+    height: 16px;
+    background: rgba(255,255,255,0.12);
+  }
+
+  .hero-nav-cta {
+    background: rgba(255,255,255,0.08) !important;
+    border: 1px solid rgba(255,255,255,0.15) !important;
+    color: var(--white) !important;
+    padding: 10px 22px !important;
+    border-radius: 6px !important;
+    backdrop-filter: blur(8px);
+    transition: background 0.2s, border-color 0.2s !important;
+  }
+  .hero-nav-cta:hover {
+    background: rgba(255,255,255,0.14) !important;
+    border-color: rgba(255,255,255,0.28) !important;
+  }
+
+  @media (max-width: 767px) {
+    .hero-nav { padding: 16px 24px; }
+    .hero-nav-links { display: none; }
+  }
+</style>

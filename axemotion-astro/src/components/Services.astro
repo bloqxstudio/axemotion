@@ -1,0 +1,145 @@
+---
+const services = [
+  {
+    nameKey: 'services.robotics_name', name: 'Industrial Robotics',
+    items: [
+      { key: 'services.robotics_i1', text: 'Programming FANUC, KUKA, YASKAWA, DENSO, UR, OMRON' },
+      { key: 'services.robotics_i2', text: 'Integration & Commissioning' },
+      { key: 'services.robotics_i3', text: 'Cycle Optimization' },
+    ],
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/><circle cx="12" cy="12" r="3"/></svg>`
+  },
+  {
+    nameKey: 'services.plc_name', name: 'PLCs & Control',
+    items: [
+      { key: 'services.plc_i1', text: 'Rockwell, Siemens, Schneider, Omron, Mitsubishi, Altus, Delta' },
+      { key: 'services.plc_i2', text: 'Programming and Optimization' },
+      { key: 'services.plc_i3', text: 'Motion Control' },
+    ],
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M6 7h.01M10 7h.01M14 7h.01M6 11h12"/></svg>`
+  },
+  {
+    nameKey: 'services.hmi_name', name: 'HMI & SCADA',
+    items: [
+      { key: 'services.hmi_i1', text: 'Interface Development' },
+      { key: 'services.hmi_i2', text: 'FactoryTalk, Ignition, Elipse' },
+      { key: 'services.hmi_i3', text: 'MES/ERP Integration' },
+      { key: 'services.hmi_i4', text: 'Full Customization' },
+    ],
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4M9 8l2 2 4-4"/></svg>`
+  },
+  {
+    nameKey: 'services.vision_name', name: 'Vision System',
+    items: [
+      { key: 'services.vision_i1', text: 'Cognex, Matrox, Keyence' },
+      { key: 'services.vision_i2', text: 'FANUC iR Vision' },
+      { key: 'services.vision_i3', text: 'Inspection Systems' },
+      { key: 'services.vision_i4', text: 'Quality Control' },
+    ],
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z"/></svg>`
+  },
+];
+---
+
+<section class="services" id="services">
+  <div class="container">
+    <div class="services-inner">
+      <div class="services-left">
+        <h2 class="services-title" data-i18n-html="services.title_html">What<br />we do</h2>
+      </div>
+      <div class="services-grid">
+        {services.map((svc, i) => (
+          <div class="service-card fade-in" style={`transition-delay:${i * 0.05}s`}>
+            <div class="service-icon" set:html={svc.icon}></div>
+            <h3 class="service-name" data-i18n={svc.nameKey}>{svc.name}</h3>
+            <ul class="service-list">
+              {svc.items.map(item => (
+                <li data-i18n={item.key}>{item.text}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Image Break -->
+  <div class="image-break-wrapper">
+    <div class="container">
+      <div class="image-break fade-in">
+        <img
+          class="image-break-img"
+          src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=1400&q=85"
+          alt="Industrial circuit board"
+          data-i18n-attr="alt:alt.image_break"
+          loading="lazy"
+        />
+        <div class="image-break-overlay">
+          <div class="image-break-content">
+            <p class="image-break-eyebrow" data-i18n="imagebreak.eyebrow">Proven Expertise</p>
+            <h3 class="image-break-title" data-i18n-html="imagebreak.title_html">Built for<br /><em>Complexity</em></h3>
+            <p class="image-break-text" data-i18n="imagebreak.text">
+              From initial programming to production cycle optimization — we deliver measurable results
+              in the most demanding industrial environments.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .services { background-color: var(--white); padding: 100px 0; }
+
+  .services-inner { display: grid; grid-template-columns: 1fr 2fr; gap: 64px; align-items: start; }
+
+  .services-left { position: sticky; top: 80px; }
+
+  .services-title { font-size: clamp(36px, 4vw, 72px); font-weight: 900; line-height: 1.0; letter-spacing: -0.045em; color: var(--navy); }
+
+  .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .service-card {
+    background-color: var(--gray-light); border-radius: 14px;
+    padding: 32px 28px 36px; display: flex; flex-direction: column; gap: 0;
+    transition: transform 0.22s var(--ease-out), box-shadow 0.22s;
+  }
+  .service-card:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
+
+  .service-icon { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; color: var(--navy); margin-bottom: 20px; }
+  .service-icon :global(svg) { width: 28px; height: 28px; }
+
+  .service-name { font-size: 18px; font-weight: 800; color: var(--navy); letter-spacing: -0.3px; margin-bottom: 16px; }
+
+  .service-list { list-style: disc; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
+  .service-list li { font-size: 14px; font-weight: 500; line-height: 1.55; color: var(--gray-dark); }
+
+  /* Image break */
+  .image-break-wrapper { margin-top: 80px; padding-bottom: 80px; }
+  .image-break { height: 480px; position: relative; overflow: hidden; border-radius: 16px; }
+  .image-break-img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; display: block; }
+  .image-break-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(105deg, rgba(13,27,42,0.92) 0%, rgba(13,27,42,0.65) 40%, rgba(13,27,42,0.15) 100%);
+    display: flex; align-items: center;
+  }
+  .image-break-content { padding: 0 clamp(24px, 6%, 80px); max-width: 600px; }
+  .image-break-eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.38); margin-bottom: 18px; }
+  .image-break-title { font-size: clamp(40px, 5.5vw, 86px); font-weight: 900; line-height: 1.0; letter-spacing: -0.04em; color: var(--white); margin-bottom: 22px; }
+  .image-break-title em { font-style: normal; color: var(--blue); }
+  .image-break-text { font-size: 16px; font-weight: 500; line-height: 1.72; color: rgba(255,255,255,0.48); max-width: 440px; }
+
+  @media (max-width: 1024px) {
+    .services-inner { grid-template-columns: 1fr; }
+    .services-left { position: static; }
+    .image-break-wrapper { padding-bottom: 60px; }
+  }
+
+  @media (max-width: 767px) {
+    .services { padding: 60px 0; }
+    .services-grid { grid-template-columns: 1fr; }
+    .image-break-wrapper { padding-bottom: 40px; }
+    .image-break { height: 320px; }
+  }
+</style>

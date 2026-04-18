@@ -1,0 +1,239 @@
+---
+const specialists = [
+  {
+    roleKey: 'contact.edson_role', role: 'PLC Specialist',
+    email: 'edsonmachado@axemotionautomation.com',
+  },
+  {
+    roleKey: 'contact.pedro_role', role: 'Robot Specialist',
+    email: 'pedrosol@axemotionautomation.com',
+  },
+];
+
+---
+
+<section class="contact-us" id="contact">
+  <div class="container">
+    <div class="contact-us-header fade-in">
+      <h2 class="contact-us-title" data-i18n-html="contact.title_html">Contact<br />Us</h2>
+      <p class="contact-us-sub" data-i18n="contact.sub">
+        Ready to automate? Let's talk about your project and how we can help.
+      </p>
+    </div>
+
+    <div class="contact-us-body">
+      <!-- Left: specialist cards -->
+      <div class="contact-persons fade-in">
+        {specialists.map(sp => (
+          <div class="contact-person">
+            <p class="contact-person-role" data-i18n={sp.roleKey}>{sp.role}</p>
+            <a href={`mailto:${sp.email}`} class="contact-person-email">{sp.email}</a>
+          </div>
+        ))}
+      </div>
+
+      <!-- Right: form -->
+      <div class="contact-form-wrap fade-in" style="transition-delay:0.1s">
+        <h3 class="contact-form-heading" data-i18n="contact.form_heading">Send Message</h3>
+        <form class="contact-form" id="contactForm" novalidate>
+          <input type="hidden" name="access_key" value="3565eea4-370a-4a78-9988-a72c5659525c" />
+          <input type="hidden" name="subject" value="New Contact - Axe Motion Automation" />
+
+          <div class="form-row">
+            <input type="text" name="name" required placeholder="Name Surname" data-i18n-attr="placeholder:contact.form_name" />
+            <input type="text" name="company" placeholder="Company Name" data-i18n-attr="placeholder:contact.form_company" />
+          </div>
+          <div class="form-row">
+            <input type="tel" name="phone" placeholder="Your Phone" data-i18n-attr="placeholder:contact.form_phone" />
+            <input type="email" name="email" required placeholder="Email" data-i18n-attr="placeholder:contact.form_email" />
+          </div>
+          <textarea name="message" rows="5" placeholder="Your Message" data-i18n-attr="placeholder:contact.form_message"></textarea>
+
+          <div class="form-footer">
+            <button type="submit" class="contact-submit-btn" id="contactSubmit" data-i18n="contact.form_submit">Send Message</button>
+            <div class="form-feedback" id="formFeedback" hidden></div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const form     = document.getElementById('contactForm') as HTMLFormElement;
+  const btn      = document.getElementById('contactSubmit') as HTMLButtonElement;
+  const feedback = document.getElementById('formFeedback') as HTMLElement;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const t = (key: string) => (window as any).AxeI18nDict?.[(window as any).AxeI18n?.current() || 'en']?.[key] ?? key;
+
+    btn.disabled = true;
+    btn.textContent = t('contact.form_sending');
+    feedback.hidden = true;
+    feedback.className = 'form-feedback';
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(Object.fromEntries(new FormData(form))),
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        feedback.textContent = t('contact.form_success');
+        feedback.classList.add('success');
+        form.reset();
+      } else {
+        throw new Error(data.message);
+      }
+    } catch {
+      feedback.textContent = t('contact.form_error');
+      feedback.classList.add('error');
+    } finally {
+      feedback.hidden = false;
+      btn.disabled = false;
+      btn.textContent = t('contact.form_submit');
+    }
+  });
+
+</script>
+
+<style>
+  .contact-us {
+    background-color: var(--gray-light);
+    background-image: url("/assets/world-map-2.svg");
+    background-size: cover;
+    background-position: center;
+    padding: 120px 0;
+  }
+
+  .contact-us-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 32px;
+    margin-bottom: 64px;
+    flex-wrap: wrap;
+  }
+
+  .contact-us-title { font-size: clamp(44px, 5.5vw, 72px); font-weight: 900; line-height: 1; letter-spacing: -0.045em; color: var(--navy); }
+
+  .contact-us-sub { font-size: 15px; font-weight: 500; line-height: 1.7; color: var(--gray-dark); max-width: 360px; }
+
+  .contact-us-body { display: grid; grid-template-columns: 1fr 1.4fr; gap: 48px; align-items: start; }
+
+  .contact-persons { display: flex; flex-direction: column; gap: 16px; }
+
+  .contact-person {
+    background: var(--white);
+    border: 1px solid var(--gray-card);
+    border-radius: 14px;
+    padding: 24px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .contact-person-role {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.13em;
+    text-transform: uppercase; color: var(--navy); font-weight: 700;
+  }
+
+  .contact-person-email {
+    font-size: 14px; font-weight: 500; color: var(--gray-dark);
+    transition: color 0.2s;
+  }
+  .contact-person-email:hover { color: var(--blue); }
+
+  /* Form */
+  .contact-form-wrap {
+    background: var(--white);
+    border: 1px solid var(--gray-card);
+    border-radius: 16px;
+    padding: 40px;
+  }
+
+  .contact-form-heading { font-size: 24px; font-weight: 800; color: var(--navy); letter-spacing: -0.5px; margin-bottom: 28px; }
+
+  .contact-form { display: flex; flex-direction: column; gap: 14px; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    background: var(--gray-light);
+    border: 1px solid var(--gray-card);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-family: var(--font);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--navy);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .contact-form input::placeholder,
+  .contact-form textarea::placeholder { color: var(--gray-dark); }
+  .contact-form input:focus,
+  .contact-form textarea:focus { border-color: var(--blue); }
+
+  .contact-form textarea { resize: vertical; min-height: 120px; }
+
+  .form-footer { display: flex; align-items: center; gap: 16px; margin-top: 8px; flex-wrap: wrap; }
+
+  .contact-submit-btn {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--blue);
+    color: var(--white);
+    border: 1.5px solid var(--blue);
+    padding: 15px 32px;
+    border-radius: 8px;
+    font-family: var(--font);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    transition: all 0.22s var(--ease-out);
+  }
+  .contact-submit-btn:hover {
+    background: var(--blue-bright);
+    border-color: var(--blue-bright);
+    box-shadow: 0 0 0 4px rgba(28,110,232,0.2), 0 10px 28px rgba(28,110,232,0.35);
+    transform: translateY(-1px);
+  }
+  .contact-submit-btn:active { transform: scale(0.97); }
+  .contact-submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none; }
+
+  .form-feedback {
+    font-size: 14px; font-weight: 600;
+    padding: 10px 16px; border-radius: 8px;
+    animation: feedbackIn 0.3s var(--ease-out);
+  }
+  .form-feedback.success { background: rgba(16,185,129,0.1); color: #059669; border: 1px solid rgba(16,185,129,0.25); }
+  .form-feedback.error   { background: rgba(239,68,68,0.08);  color: #dc2626; border: 1px solid rgba(239,68,68,0.2); }
+
+  @keyframes feedbackIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 1024px) {
+    .contact-us-body { grid-template-columns: 1fr; }
+    .contact-us-header { align-items: flex-start; margin-bottom: 48px; }
+  }
+
+  @media (max-width: 767px) {
+    .contact-us { padding: 60px 0; }
+    .contact-us-header { margin-bottom: 36px; }
+    .contact-us-sub { max-width: 100%; }
+    .form-row { grid-template-columns: 1fr; }
+    .contact-form-wrap { padding: 24px; }
+  }
+</style>

@@ -1,0 +1,234 @@
+---
+const carouselImages = [
+  { src: "https://images.unsplash.com/photo-1565514020179-026b92b84bb6?w=900&q=80", i18nAlt: "alt.carousel_system", i18nLabel: "carousel.system", label: "System Integration" },
+  { src: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=900&q=80", i18nAlt: "alt.carousel_robot",  i18nLabel: "carousel.robotics", label: "Robotics" },
+  { src: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=80", i18nAlt: "alt.carousel_control", i18nLabel: "carousel.plc",      label: "PLC & Control" },
+  { src: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=80", i18nAlt: "alt.carousel_circuit", i18nLabel: "carousel.electronics",label: "Electronics" },
+  { src: "https://images.unsplash.com/photo-1612528443702-f6741f70a049?w=900&q=80", i18nAlt: "alt.carousel_welding", i18nLabel: "carousel.welding",   label: "Welding Automation" },
+  { src: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=900&q=80", i18nAlt: "alt.carousel_production", i18nLabel: "carousel.production", label: "Production Lines" },
+  { src: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=900&q=80", i18nAlt: "alt.carousel_sensors", i18nLabel: "carousel.sensors",   label: "Sensors & IoT" },
+];
+---
+
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-top">
+      <div class="about-left fade-in">
+        <span class="label" data-i18n="about.label">Who We Are</span>
+        <h2 class="about-title" data-i18n-html="about.title_html">We Work<br />With <em>Industry</em></h2>
+      </div>
+      <div class="about-right fade-in" style="transition-delay:0.1s">
+        <p class="about-description" data-i18n="about.description">
+          Axe Motion Automation specializes in system integration and control software for industry.
+          We transform industrial processes into more efficient, safe, and productive operations through
+          robot programming, automated cell integration, and complete automation solutions.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Full-width carousel -->
+  <div class="about-carousel-scroll" id="carousel">
+    <div class="about-carousel-track" id="carouselTrack">
+      {carouselImages.map((img) => (
+        <div class="about-img">
+          <img src={img.src} alt={img.label} data-i18n-attr={`alt:${img.i18nAlt}`} loading="lazy" draggable="false" />
+          <div class="about-img-label" data-i18n={img.i18nLabel}>{img.label}</div>
+        </div>
+      ))}
+      <!-- Clones for infinite loop -->
+      {carouselImages.map((img) => (
+        <div class="about-img" aria-hidden="true">
+          <img src={img.src} alt="" loading="lazy" draggable="false" />
+          <div class="about-img-label" data-i18n={img.i18nLabel}>{img.label}</div>
+        </div>
+      ))}
+    </div>
+    <div class="about-carousel-progress">
+      <div class="about-carousel-bar"><div class="about-carousel-fill" id="carouselFill"></div></div>
+      <span class="about-carousel-pct" id="carouselPct">0%</span>
+    </div>
+  </div>
+
+  <!-- Countries -->
+  <div class="container">
+    <div class="about-countries fade-in">
+      <p class="about-countries-label" data-i18n="about.countries_label">Operating in</p>
+      <div class="country-grid">
+        <div class="country-pill"><span class="flag">🇧🇷</span><span data-i18n="about.country_brazil">Brazil</span></div>
+        <div class="country-pill"><span class="flag">🇩🇪</span><span data-i18n="about.country_germany">Germany</span></div>
+        <div class="country-pill"><span class="flag">🇺🇸</span><span data-i18n="about.country_usa">United States</span></div>
+        <div class="country-pill"><span class="flag">🇦🇷</span><span data-i18n="about.country_argentina">Argentina</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about { background-color: var(--gray-light); padding: 100px 0 0; }
+
+  .about-top {
+    display: grid;
+    grid-template-columns: minmax(340px, 2fr) 3fr;
+    column-gap: 96px;
+    row-gap: 60px;
+    padding-bottom: 0;
+  }
+
+  .about-left { display: flex; flex-direction: column; gap: 28px; }
+
+  .about-title {
+    font-size: clamp(36px, 3.8vw, 56px); font-weight: 800; line-height: 1.05;
+    letter-spacing: -0.04em; color: var(--navy);
+  }
+  .about-title em { font-style: normal; color: var(--blue); }
+
+  .about-right { display: flex; flex-direction: column; justify-content: flex-end; gap: 32px; padding-top: 64px; }
+
+  .about-description { font-size: 17px; font-weight: 500; line-height: 1.8; color: var(--gray-dark); max-width: 560px; }
+
+  .about-carousel-scroll { position: relative; height: 560px; margin-top: 60px; overflow: hidden; }
+
+  .about-carousel-track {
+    position: absolute; top: 0; left: 0;
+    display: flex; gap: 6px; height: 100%;
+    will-change: transform;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .about-carousel-track:active { cursor: grabbing; }
+  .about-carousel-track img { pointer-events: none; }
+
+  .about-img { position: relative; overflow: hidden; flex-shrink: 0; border-radius: 4px; width: clamp(300px, 32vw, 480px); }
+  .about-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s var(--ease-out); }
+  .about-img:hover img { transform: scale(1.04); }
+
+  .about-img-label {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 56px 20px 20px;
+    background: linear-gradient(to top, rgba(13,27,42,0.85) 0%, transparent 100%);
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: rgba(255,255,255,0.55);
+  }
+
+  .about-carousel-progress {
+    position: absolute; bottom: 18px; right: 24px;
+    display: flex; align-items: center; gap: 6px; z-index: 2;
+  }
+  .about-carousel-bar { width: 80px; height: 2px; background: rgba(255,255,255,0.15); border-radius: 2px; overflow: hidden; }
+  .about-carousel-fill { height: 100%; width: 0%; background: var(--blue-bright); border-radius: 2px; transition: width 0.05s linear; }
+  .about-carousel-pct { font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em; color: rgba(255,255,255,0.3); min-width: 28px; }
+
+  .about-countries { padding: 60px 0; border-top: 1px solid var(--gray-card); }
+  .about-countries-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray-dark); margin-bottom: 20px; text-align: center; }
+
+  .country-grid { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+  .country-pill {
+    display: inline-flex; align-items: center; gap: 10px;
+    background-color: var(--white); border: 1px solid var(--gray-card);
+    border-radius: 999px; padding: 12px 22px;
+    font-size: 14px; font-weight: 700; color: var(--navy); white-space: nowrap;
+    transition: border-color 0.2s, background 0.2s, transform 0.2s var(--ease-out), box-shadow 0.2s;
+  }
+  .country-pill:hover { border-color: var(--navy); background: var(--navy); color: var(--white); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(13,27,42,0.15); }
+  .country-pill .flag { font-size: 18px; line-height: 1; }
+
+  @media (max-width: 1024px) {
+    .about-top { grid-template-columns: 1fr; }
+    .about-right { padding-top: 0; }
+    .about-carousel-scroll { height: 380px; }
+  }
+
+  @media (max-width: 767px) {
+    .about { padding: 60px 0 0; }
+    .about-carousel-scroll { height: 280px; }
+  }
+</style>
+
+<script>
+  // Carousel logic
+  const carousel = document.getElementById('carousel');
+  const track = document.getElementById('carouselTrack') as HTMLElement;
+  const fill  = document.getElementById('carouselFill') as HTMLElement;
+  const pct   = document.getElementById('carouselPct') as HTMLElement;
+
+  if (track && carousel) {
+    const items = track.querySelectorAll('.about-img');
+    const itemCount = items.length / 2;
+    let setWidth = 0;
+    let pos = 0;
+    let posTarget = 0;
+    let rafId: number;
+    let isVisible = false;
+    let isDragging = false;
+    let dragStartX = 0;
+    let dragStartPos = 0;
+    let lastScrollY = window.scrollY;
+
+    function calcSetWidth() {
+      const firstItems = Array.from(items).slice(0, itemCount) as HTMLElement[];
+      setWidth = firstItems.reduce((w, el) => w + el.offsetWidth + 6, 0);
+    }
+    calcSetWidth();
+    window.addEventListener('resize', calcSetWidth);
+
+    function loop() {
+      pos += (posTarget - pos) * 0.08;
+      const offset = ((pos % setWidth) + setWidth) % setWidth;
+      track.style.transform = `translateX(-${offset}px)`;
+
+      if (setWidth > 0) {
+        const progress = (offset / setWidth) * 100;
+        fill.style.width = progress + '%';
+        pct.textContent = Math.round(progress) + '%';
+      }
+      rafId = requestAnimationFrame(loop);
+    }
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        isVisible = e.isIntersecting;
+        if (isVisible && !rafId) { rafId = requestAnimationFrame(loop); }
+        else if (!isVisible) { cancelAnimationFrame(rafId); (rafId as any) = null; }
+      });
+    });
+    io.observe(carousel);
+
+    // Scroll drive
+    window.addEventListener('scroll', () => {
+      if (!isVisible || isDragging) return;
+      const dy = window.scrollY - lastScrollY;
+      posTarget += dy * 0.5;
+      lastScrollY = window.scrollY;
+    }, { passive: true });
+
+    // Drag
+    track.addEventListener('mousedown', (e) => {
+      e.preventDefault(); // bloqueia drag nativo de imagens
+      isDragging = true;
+      dragStartX = e.clientX;
+      dragStartPos = posTarget;
+      track.style.cursor = 'grabbing';
+    });
+    window.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      posTarget = dragStartPos - (e.clientX - dragStartX);
+    });
+    window.addEventListener('mouseup', () => {
+      isDragging = false;
+      track.style.cursor = 'grab';
+    });
+
+    track.addEventListener('touchstart', (e) => {
+      isDragging = true;
+      dragStartX = e.touches[0].clientX;
+      dragStartPos = posTarget;
+    }, { passive: true });
+    track.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      posTarget = dragStartPos - (e.touches[0].clientX - dragStartX);
+    }, { passive: true });
+    track.addEventListener('touchend', () => { isDragging = false; });
+  }
+</script>
