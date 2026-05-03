@@ -1,35 +1,15 @@
 ---
-const specialists = [
-  {
-    roleKey: 'contact.edson_role', role: 'PLC Specialist',
-    email: 'edsonmachado@axemotionautomation.com',
-  },
-  {
-    roleKey: 'contact.pedro_role', role: 'Robot Specialist',
-    email: 'pedrosol@axemotionautomation.com',
-  },
-];
-
 ---
 
 <section class="contact-us" id="contact">
   <div class="container">
-    <div class="contact-us-header fade-in">
-      <h2 class="contact-us-title" data-i18n-html="contact.title_html">Contact<br />Us</h2>
-      <p class="contact-us-sub" data-i18n="contact.sub">
-        Ready to automate? Let's talk about your project and how we can help.
-      </p>
-    </div>
-
     <div class="contact-us-body">
-      <!-- Left: specialist cards -->
-      <div class="contact-persons fade-in">
-        {specialists.map(sp => (
-          <div class="contact-person">
-            <p class="contact-person-role" data-i18n={sp.roleKey}>{sp.role}</p>
-            <a href={`mailto:${sp.email}`} class="contact-person-email">{sp.email}</a>
-          </div>
-        ))}
+      <!-- Left: title + description -->
+      <div class="contact-intro fade-in">
+        <h2 class="contact-us-title" data-i18n-html="contact.title_html">Contact<br />Us</h2>
+        <p class="contact-intro-text" data-i18n="contact.sub">
+          Ready to automate? Let's talk about your project and how we can help.
+        </p>
       </div>
 
       <!-- Right: form -->
@@ -38,6 +18,24 @@ const specialists = [
         <form class="contact-form" id="contactForm" novalidate>
           <input type="hidden" name="access_key" value="3565eea4-370a-4a78-9988-a72c5659525c" />
           <input type="hidden" name="subject" value="New Contact - Axe Motion Automation" />
+
+          <div class="form-field">
+            <label class="form-label" data-i18n="contact.form_service_label">I'd like to talk to:</label>
+            <div class="form-segmented" role="radiogroup" aria-labelledby="service-label">
+              <label class="form-segment">
+                <input type="radio" name="service" value="PLC Specialist" required />
+                <span data-i18n="contact.service_plc">PLC Specialist</span>
+              </label>
+              <label class="form-segment">
+                <input type="radio" name="service" value="Robot Specialist" />
+                <span data-i18n="contact.service_robot">Robot Specialist</span>
+              </label>
+              <label class="form-segment">
+                <input type="radio" name="service" value="Other / Not sure" />
+                <span data-i18n="contact.service_other">Other / Not sure</span>
+              </label>
+            </div>
+          </div>
 
           <div class="form-row">
             <input type="text" name="name" required placeholder="Name Surname" data-i18n-attr="placeholder:contact.form_name" />
@@ -110,43 +108,12 @@ const specialists = [
     padding: 120px 0;
   }
 
-  .contact-us-header {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 32px;
-    margin-bottom: 64px;
-    flex-wrap: wrap;
-  }
-
   .contact-us-title { font-size: clamp(44px, 5.5vw, 72px); font-weight: 900; line-height: 1; letter-spacing: -0.045em; color: var(--navy); }
 
-  .contact-us-sub { font-size: 15px; font-weight: 500; line-height: 1.7; color: var(--gray-dark); max-width: 360px; }
+  .contact-us-body { display: grid; grid-template-columns: 1fr 1.4fr; gap: 64px; align-items: start; }
 
-  .contact-us-body { display: grid; grid-template-columns: 1fr 1.4fr; gap: 48px; align-items: start; }
-
-  .contact-persons { display: flex; flex-direction: column; gap: 16px; }
-
-  .contact-person {
-    background: var(--white);
-    border: 1px solid var(--gray-card);
-    border-radius: 14px;
-    padding: 24px 28px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .contact-person-role {
-    font-family: var(--mono); font-size: 12px; letter-spacing: 0.13em;
-    text-transform: uppercase; color: var(--navy); font-weight: 700;
-  }
-
-  .contact-person-email {
-    font-size: 14px; font-weight: 500; color: var(--gray-dark);
-    transition: color 0.2s;
-  }
-  .contact-person-email:hover { color: var(--blue); }
+  .contact-intro { display: flex; flex-direction: column; gap: 28px; }
+  .contact-intro-text { font-size: 17px; font-weight: 500; line-height: 1.7; color: var(--gray-dark); max-width: 420px; }
 
   /* Form */
   .contact-form-wrap {
@@ -159,6 +126,33 @@ const specialists = [
   .contact-form-heading { font-size: 24px; font-weight: 800; color: var(--navy); letter-spacing: -0.5px; margin-bottom: 28px; }
 
   .contact-form { display: flex; flex-direction: column; gap: 14px; }
+
+  .form-field { display: flex; flex-direction: column; gap: 10px; }
+  .form-label {
+    font-family: var(--mono); font-size: 11px; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--navy);
+  }
+  .form-segmented { display: flex; gap: 8px; flex-wrap: wrap; }
+  .form-segment {
+    flex: 1; min-width: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--gray-light);
+    border: 1px solid var(--gray-card);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 13px; font-weight: 600; color: var(--gray-dark);
+    cursor: pointer;
+    transition: border-color 0.18s, background 0.18s, color 0.18s;
+    text-align: center;
+  }
+  .form-segment input { position: absolute; opacity: 0; pointer-events: none; }
+  .form-segment:hover { color: var(--navy); border-color: var(--gray-dark); }
+  .form-segment:has(input:checked) {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: var(--white);
+    box-shadow: 0 4px 14px rgba(28,110,232,0.22);
+  }
 
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 

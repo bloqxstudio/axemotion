@@ -2,11 +2,11 @@
 const specialists = [
   {
     roleKey: 'qc.edson_role', role: 'PLC Specialist',
-    email: 'edsonmachado@axemotionautomation.com',
+    descKey: 'qc.edson_desc', desc: 'PLCs, control & SCADA',
   },
   {
     roleKey: 'qc.pedro_role', role: 'Robot Specialist',
-    email: 'pedrosol@axemotionautomation.com',
+    descKey: 'qc.pedro_desc', desc: 'Robotics & integration',
   },
 ];
 ---
@@ -31,7 +31,7 @@ const specialists = [
       <div class="qc-person">
         <div class="qc-person-info">
           <p class="qc-person-role" data-i18n={sp.roleKey}>{sp.role}</p>
-          <a href={`mailto:${sp.email}`} class="qc-person-email">{sp.email}</a>
+          <p class="qc-person-desc" data-i18n={sp.descKey}>{sp.desc}</p>
         </div>
       </div>
     ))}
@@ -131,11 +131,9 @@ const specialists = [
     text-transform: uppercase; color: var(--navy); font-weight: 700;
   }
 
-  .qc-person-email {
+  .qc-person-desc {
     font-size: 12px; color: var(--gray-dark); font-weight: 500;
-    transition: color 0.2s;
   }
-  .qc-person-email:hover { color: var(--blue); }
 
   .qc-divider { height: 1px; background: var(--gray-card); margin: 4px 0; }
 
