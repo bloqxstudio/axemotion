@@ -1,0 +1,213 @@
+---
+const types = [
+  {
+    key: 'commercial',
+    nameKey: 'partners.commercial_name',
+    descKey: 'partners.commercial_desc',
+    serviceValue: 'Parceria Comercial',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
+  },
+  {
+    key: 'business',
+    nameKey: 'partners.business_name',
+    descKey: 'partners.business_desc',
+    serviceValue: 'Parceria de Negócios',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="6" height="6" rx="1"/><rect x="16" y="3" width="6" height="6" rx="1"/><rect x="9" y="15" width="6" height="6" rx="1"/><path d="M5 9v3h14V9M12 12v3"/></svg>`,
+  },
+];
+---
+
+<section class="partners" id="partners">
+  <div class="container">
+    <div class="partners-head fade-in">
+      <span class="label partners-label" data-i18n="partners.eyebrow">Partnerships</span>
+      <h2 class="partners-title" data-i18n-html="partners.title_html">Become our<br /><em>partner</em></h2>
+      <p class="partners-sub" data-i18n="partners.sub">Want to work with us in a different way? Let's talk.</p>
+    </div>
+
+    <div class="partners-grid">
+      {types.map((t, i) => (
+        <article class="partner-card fade-in" style={`transition-delay:${0.08 + i * 0.06}s`}>
+          <div class="partner-icon" set:html={t.icon}></div>
+          <h3 class="partner-name" data-i18n={t.nameKey}>{t.key}</h3>
+          <p class="partner-desc" data-i18n={t.descKey}></p>
+          <button
+            type="button"
+            class="partner-cta"
+            data-partner-cta
+            data-service={t.serviceValue}
+            data-i18n="partners.cta"
+          >
+            I want to partner
+            <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
+              <path d="M2.5 7H11.5M11.5 7L7.5 3M11.5 7L7.5 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-partner-cta]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const select = document.querySelector<HTMLSelectElement>('#contactForm select[name="service"]');
+      const service = btn.dataset.service;
+      if (select && service) {
+        select.value = service;
+        select.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setTimeout(() => {
+        document.querySelector<HTMLInputElement>('#contactForm input[name="name"]')?.focus({ preventScroll: true });
+      }, 700);
+    });
+  });
+</script>
+
+<style>
+  .partners {
+    background-color: var(--navy);
+    color: var(--white);
+    padding: 100px 0;
+    position: relative;
+    border-top: 1px solid var(--gray-card);
+  }
+
+  /* Same accent line as SocialBar / Hero scanline */
+  .partners::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      var(--blue) 25%,
+      var(--blue-bright) 50%,
+      var(--blue) 75%,
+      transparent 100%
+    );
+    opacity: 0.35;
+  }
+
+  .partners-head {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 640px;
+    margin-bottom: 52px;
+  }
+
+  .partners-label {
+    color: rgba(255,255,255,0.55);
+  }
+
+  .partners-title {
+    font-size: clamp(36px, 4.5vw, 56px);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    color: var(--white);
+  }
+  .partners-title em {
+    font-style: normal;
+    color: var(--blue-bright);
+  }
+
+  .partners-sub {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.6);
+    max-width: 480px;
+  }
+
+  /* Cards — mirror Differentials .diff-card structure, dark variant */
+  .partners-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .partner-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 32px 28px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    transition: background 0.22s var(--ease-out), border-color 0.22s, transform 0.22s;
+  }
+  .partner-card:hover {
+    background: rgba(255,255,255,0.06);
+    border-color: rgba(255,255,255,0.16);
+    transform: translateY(-3px);
+  }
+
+  .partner-icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--blue-bright);
+    margin-bottom: 20px;
+  }
+  .partner-icon :global(svg) { width: 28px; height: 28px; }
+
+  .partner-name {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: -0.3px;
+    margin-bottom: 12px;
+  }
+
+  .partner-desc {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 24px;
+  }
+
+  /* CTA — mirrors hero btn style: mono uppercase, blue fill */
+  .partner-cta {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--blue);
+    color: var(--white);
+    border: 1.5px solid var(--blue);
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.22s var(--ease-out);
+  }
+  .partner-cta:hover {
+    background: var(--blue-bright);
+    border-color: var(--blue-bright);
+    box-shadow: 0 0 0 4px rgba(28,110,232,0.2), 0 10px 28px rgba(28,110,232,0.35);
+    transform: translateY(-1px);
+  }
+  .partner-cta svg { transition: transform 0.2s; }
+  .partner-cta:hover svg { transform: translateX(3px); }
+
+  @media (max-width: 1024px) {
+    .partners-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 767px) {
+    .partners { padding: 60px 0; }
+    .partners-head { margin-bottom: 36px; }
+    .partners-grid { grid-template-columns: 1fr; }
+  }
+</style>

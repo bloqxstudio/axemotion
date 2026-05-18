@@ -5,6 +5,7 @@ import About from '../components/About.astro';
 import Services from '../components/Services.astro';
 import Differentials from '../components/Differentials.astro';
 import Contact from '../components/Contact.astro';
+import Partners from '../components/Partners.astro';
 import FloatingNav from '../components/FloatingNav.astro';
 import SocialBar from '../components/SocialBar.astro';
 ---
@@ -16,6 +17,7 @@ import SocialBar from '../components/SocialBar.astro';
   <Services />
   <Differentials />
   <Contact />
+  <Partners />
   <SocialBar />
 
   <!-- i18n engine + fade-in observer -->
@@ -32,7 +34,7 @@ import SocialBar from '../components/SocialBar.astro';
         'alt.carousel_control':'Control panel','alt.carousel_circuit':'Circuit board',
         'alt.carousel_welding':'Industrial welding robot','alt.carousel_production':'Factory production line',
         'alt.carousel_sensors':'Sensor technology','alt.image_break':'Industrial circuit board — built for complexity',
-        'nav.services':'Services','nav.about':'About','nav.projects':'Projects','nav.contact':'Contact',
+        'nav.services':'Services','nav.about':'About','nav.projects':'Projects','nav.partners':'Partners','nav.contact':'Contact',
         'hero.eyebrow':'Industrial Automation · Specialized System Integration',
         'hero.headline_html':'Smart automation,<br><span class="hero-headline-accent">real results.</span>',
         'hero.subheadline_html':'From advanced robot programming to turn-key cell integration, we deliver solutions that <strong>eliminate downtime, mitigate errors, and scale your productivity</strong> — without disrupting your current operation.',
@@ -73,6 +75,16 @@ import SocialBar from '../components/SocialBar.astro';
         'contact.form_company':'Company Name','contact.form_phone':'Your Phone',
         'contact.form_email':'Email','contact.form_message':'Your Message','contact.form_submit':'Send Message',
         'contact.form_service':'Service Type','contact.form_service_other':'Other',
+        'contact.form_service_partner_commercial':'Commercial Partnership',
+        'contact.form_service_partner_business':'Business Partnership',
+        'partners.eyebrow':'Partnerships',
+        'partners.title_html':'Become our<br><em>partner</em>',
+        'partners.sub':"Want to work with us in a different way? Let's talk.",
+        'partners.commercial_name':'Commercial Partner',
+        'partners.commercial_desc':'For resellers, integrators and representatives who want to offer our solutions.',
+        'partners.business_name':'Business Partner',
+        'partners.business_desc':'For companies who want to build projects together and grow with us.',
+        'partners.cta':'I want to partner',
         'footer.copy':'© 2025 Axe Motion Automation. All rights reserved.',
         'contact.form_success': '✓ Message sent! We\'ll be in touch soon.',
         'contact.form_error':   '✗ Something went wrong. Please try again.',
@@ -88,7 +100,7 @@ import SocialBar from '../components/SocialBar.astro';
         'alt.carousel_control':'Painel de controle','alt.carousel_circuit':'Placa de circuito',
         'alt.carousel_welding':'Robô industrial de soldagem','alt.carousel_production':'Linha de produção fabril',
         'alt.carousel_sensors':'Tecnologia de sensores','alt.image_break':'Placa de circuito industrial — construída para complexidade',
-        'nav.services':'Serviços','nav.about':'Sobre','nav.projects':'Projetos','nav.contact':'Contato',
+        'nav.services':'Serviços','nav.about':'Sobre','nav.projects':'Projetos','nav.partners':'Parceiros','nav.contact':'Contato',
         'hero.eyebrow':'Automação Industrial · Integração de Sistemas Especializada',
         'hero.headline_html':'Automação inteligente,<br><span class="hero-headline-accent">resultado real.</span>',
         'hero.subheadline_html':'Da programação avançada de robôs à integração de células turn-key, desenvolvemos soluções que <strong>eliminam paradas, mitigam erros e escalam sua produtividade</strong> — sem interromper o fluxo da sua operação atual.',
@@ -129,6 +141,16 @@ import SocialBar from '../components/SocialBar.astro';
         'contact.form_company':'Nome da empresa','contact.form_phone':'Seu telefone',
         'contact.form_email':'E-mail','contact.form_message':'Sua mensagem','contact.form_submit':'Enviar mensagem',
         'contact.form_service':'Tipo de Serviço','contact.form_service_other':'Outro',
+        'contact.form_service_partner_commercial':'Parceria Comercial',
+        'contact.form_service_partner_business':'Parceria de Negócios',
+        'partners.eyebrow':'Parcerias',
+        'partners.title_html':'Seja nosso<br><em>parceiro</em>',
+        'partners.sub':'Quer trabalhar com a gente de outro jeito? Bora conversar.',
+        'partners.commercial_name':'Parceiro Comercial',
+        'partners.commercial_desc':'Para revendas, integradores e representantes que querem oferecer nossas soluções.',
+        'partners.business_name':'Parceiro de Negócios',
+        'partners.business_desc':'Para empresas que querem fazer projetos junto com a gente.',
+        'partners.cta':'Quero ser parceiro',
         'footer.copy':'© 2025 Axe Motion Automation. Todos os direitos reservados.',
         'contact.form_success': '✓ Mensagem enviada! Entraremos em contato em breve.',
         'contact.form_error':   '✗ Algo deu errado. Por favor, tente novamente.',
