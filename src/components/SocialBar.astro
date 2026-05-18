@@ -2,7 +2,6 @@
 interface Props {
   links?: {
     linkedin?: string;
-    instagram?: string;
   };
   logoSrc?: string;
   logoAlt?: string;
@@ -11,7 +10,6 @@ interface Props {
 const {
   links = {
     linkedin: "#",
-    instagram: "#",
   },
   logoSrc = "/assets/logo.svg",
   logoAlt = "Axemotion",
@@ -26,12 +24,6 @@ const {
         <a href={links.linkedin} target="_blank" rel="noopener noreferrer" class="social-bar__link">
           <span class="link-line"></span>
           LINKEDIN
-        </a>
-      )}
-      {links.instagram && (
-        <a href={links.instagram} target="_blank" rel="noopener noreferrer" class="social-bar__link">
-          <span class="link-line"></span>
-          INSTAGRAM
         </a>
       )}
     </nav>

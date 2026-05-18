@@ -3,13 +3,12 @@
 
 <header class="float-nav" id="floatNav" aria-hidden="true">
   <div class="float-nav-inner">
-    <a href="/" class="float-nav-logo">
+    <a href="#hero" class="float-nav-logo" id="floatNavLogo">
       <img src="/assets/logo.svg" alt="Axe Motion Automation" width="140" />
     </a>
     <nav class="float-nav-links" aria-label="Site navigation">
       <a href="#services" data-i18n="nav.services">Services</a>
       <a href="#about"    data-i18n="nav.about">About</a>
-      <a href="#contact"  data-i18n="nav.contact">Contact</a>
     </nav>
     <a href="#contact" class="btn btn-hero-primary float-nav-cta" data-i18n="nav.contact">Contact</a>
 
@@ -67,7 +66,7 @@
     padding: 14px 28px;
   }
 
-  .float-nav-logo img { display: block; filter: brightness(10); opacity: 0.9; }
+  .float-nav-logo img { display: block; opacity: 0.92; }
 
   .float-nav-links { display: flex; gap: 28px; align-items: center; }
   .float-nav-links a {
@@ -183,6 +182,13 @@
   const hero = document.getElementById('hero')!;
   const burger = document.getElementById('burger')!;
   const mobileMenu = document.getElementById('mobileMenu')!;
+  const floatNavLogo = document.getElementById('floatNavLogo')!;
+
+  // Logo click: smooth-scroll to top instead of reloading
+  floatNavLogo.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 
   // Show/hide floating nav based on hero visibility
   const io = new IntersectionObserver(

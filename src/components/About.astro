@@ -1,12 +1,11 @@
 ---
 const carouselImages = [
-  { src: "https://images.unsplash.com/photo-1565514020179-026b92b84bb6?w=900&q=80", i18nAlt: "alt.carousel_system", i18nLabel: "carousel.system", label: "System Integration" },
-  { src: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=900&q=80", i18nAlt: "alt.carousel_robot",  i18nLabel: "carousel.robotics", label: "Robotics" },
-  { src: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=80", i18nAlt: "alt.carousel_control", i18nLabel: "carousel.plc",      label: "PLC & Control" },
-  { src: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=80", i18nAlt: "alt.carousel_circuit", i18nLabel: "carousel.electronics",label: "Electronics" },
-  { src: "https://images.unsplash.com/photo-1612528443702-f6741f70a049?w=900&q=80", i18nAlt: "alt.carousel_welding", i18nLabel: "carousel.welding",   label: "Welding Automation" },
+  { src: "/assets/carousel/00-baycity.jpeg",    i18nAlt: "alt.carousel_field",      i18nLabel: "carousel.field",       label: "Field · Bay City, MI" },
+  { src: "/assets/carousel/02-robotics.png",    i18nAlt: "alt.carousel_robot",      i18nLabel: "carousel.robotics",    label: "Robotics" },
+  { src: "/assets/carousel/04-electronics.png", i18nAlt: "alt.carousel_circuit",    i18nLabel: "carousel.electronics", label: "Electronics" },
+  // TODO slot 06: regerar pelo prompt em PROMPT-IA-CARROSSEL.md (Production Lines) — usando Unsplash até lá
   { src: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=900&q=80", i18nAlt: "alt.carousel_production", i18nLabel: "carousel.production", label: "Production Lines" },
-  { src: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=900&q=80", i18nAlt: "alt.carousel_sensors", i18nLabel: "carousel.sensors",   label: "Sensors & IoT" },
+  { src: "/assets/carousel/07-sensors.png",     i18nAlt: "alt.carousel_sensors",    i18nLabel: "carousel.sensors",     label: "Sensors & IoT" },
 ];
 ---
 
@@ -15,13 +14,14 @@ const carouselImages = [
     <div class="about-top">
       <div class="about-left fade-in">
         <span class="label" data-i18n="about.label">Who We Are</span>
-        <h2 class="about-title" data-i18n-html="about.title_html">We Work<br />With <em>Industry</em></h2>
+        <h2 class="about-title" data-i18n-html="about.title_html">Software, control, and robotics for<br /><em>high-performance</em> operations</h2>
       </div>
       <div class="about-right fade-in" style="transition-delay:0.1s">
         <p class="about-description" data-i18n="about.description">
-          Axe Motion Automation specializes in system integration and control software for industry.
-          We transform industrial processes into more efficient, safe, and productive operations through
-          robot programming, automated cell integration, and complete automation solutions.
+          Axe Motion Automation specializes in software for industrial automation, with strong expertise
+          in PLC, process control, and robotics. We participate in critical projects, developing and
+          integrating systems that increase efficiency, reduce failures, and ensure maximum reliability
+          in operation.
         </p>
       </div>
     </div>
@@ -53,7 +53,7 @@ const carouselImages = [
   <!-- Countries -->
   <div class="container">
     <div class="about-countries fade-in">
-      <p class="about-countries-label" data-i18n="about.countries_label">Operating in</p>
+      <p class="about-countries-label" data-i18n="about.countries_label">International Project Experience</p>
       <div class="country-grid">
         <div class="country-pill"><span class="flag">🇧🇷</span><span data-i18n="about.country_brazil">Brazil</span></div>
         <div class="country-pill"><span class="flag">🇩🇪</span><span data-i18n="about.country_germany">Germany</span></div>
@@ -78,8 +78,8 @@ const carouselImages = [
   .about-left { display: flex; flex-direction: column; gap: 28px; }
 
   .about-title {
-    font-size: clamp(36px, 3.8vw, 56px); font-weight: 800; line-height: 1.05;
-    letter-spacing: -0.04em; color: var(--navy);
+    font-size: clamp(26px, 2.8vw, 44px); font-weight: 800; line-height: 1.15;
+    letter-spacing: -0.025em; color: var(--navy);
   }
   .about-title em { font-style: normal; color: var(--blue); }
 

@@ -1,38 +1,16 @@
 ---
-const specialists = [
-  {
-    roleKey: 'contact.edson_role', role: 'PLC Specialist',
-    email: 'edsonmachado@axemotionautomation.com',
-  },
-  {
-    roleKey: 'contact.pedro_role', role: 'Robot Specialist',
-    email: 'pedrosol@axemotionautomation.com',
-  },
-];
-
 ---
 
 <section class="contact-us" id="contact">
   <div class="container">
-    <div class="contact-us-header fade-in">
-      <h2 class="contact-us-title" data-i18n-html="contact.title_html">Contact<br />Us</h2>
-      <p class="contact-us-sub" data-i18n="contact.sub">
-        Ready to automate? Let's talk about your project and how we can help.
-      </p>
-    </div>
-
     <div class="contact-us-body">
-      <!-- Left: specialist cards -->
-      <div class="contact-persons fade-in">
-        {specialists.map(sp => (
-          <div class="contact-person">
-            <p class="contact-person-role" data-i18n={sp.roleKey}>{sp.role}</p>
-            <a href={`mailto:${sp.email}`} class="contact-person-email">{sp.email}</a>
-          </div>
-        ))}
+      <div class="contact-us-intro fade-in">
+        <h2 class="contact-us-title" data-i18n-html="contact.title_html">Contact<br />Us</h2>
+        <p class="contact-us-sub" data-i18n="contact.sub">
+          Ready to automate? Let's talk about your project and how we can help.
+        </p>
       </div>
 
-      <!-- Right: form -->
       <div class="contact-form-wrap fade-in" style="transition-delay:0.1s">
         <h3 class="contact-form-heading" data-i18n="contact.form_heading">Send Message</h3>
         <form class="contact-form" id="contactForm" novalidate>
@@ -47,6 +25,14 @@ const specialists = [
             <input type="tel" name="phone" placeholder="Your Phone" data-i18n-attr="placeholder:contact.form_phone" />
             <input type="email" name="email" required placeholder="Email" data-i18n-attr="placeholder:contact.form_email" />
           </div>
+          <select name="service" required class="contact-form-select" data-i18n-attr="aria-label:contact.form_service">
+            <option value="" disabled selected data-i18n="contact.form_service">Tipo de Serviço</option>
+            <option value="Robótica Industrial" data-i18n="services.robotics_name">Robótica Industrial</option>
+            <option value="CLPs & Controle" data-i18n="services.plc_name">CLPs & Controle</option>
+            <option value="IHM & SCADA" data-i18n="services.hmi_name">IHM & SCADA</option>
+            <option value="Sistema de Visão" data-i18n="services.vision_name">Sistema de Visão</option>
+            <option value="Outro" data-i18n="contact.form_service_other">Outro</option>
+          </select>
           <textarea name="message" rows="5" placeholder="Your Message" data-i18n-attr="placeholder:contact.form_message"></textarea>
 
           <div class="form-footer">
@@ -110,43 +96,25 @@ const specialists = [
     padding: 120px 0;
   }
 
-  .contact-us-header {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 32px;
-    margin-bottom: 64px;
-    flex-wrap: wrap;
+  .contact-us-body {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 64px;
+    align-items: start;
   }
 
-  .contact-us-title { font-size: clamp(44px, 5.5vw, 72px); font-weight: 900; line-height: 1; letter-spacing: -0.045em; color: var(--navy); }
-
-  .contact-us-sub { font-size: 15px; font-weight: 500; line-height: 1.7; color: var(--gray-dark); max-width: 360px; }
-
-  .contact-us-body { display: grid; grid-template-columns: 1fr 1.4fr; gap: 48px; align-items: start; }
-
-  .contact-persons { display: flex; flex-direction: column; gap: 16px; }
-
-  .contact-person {
-    background: var(--white);
-    border: 1px solid var(--gray-card);
-    border-radius: 14px;
-    padding: 24px 28px;
+  .contact-us-intro {
+    position: sticky;
+    top: 100px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 24px;
+    padding-top: 12px;
   }
 
-  .contact-person-role {
-    font-family: var(--mono); font-size: 12px; letter-spacing: 0.13em;
-    text-transform: uppercase; color: var(--navy); font-weight: 700;
-  }
+  .contact-us-title { font-size: clamp(40px, 4.6vw, 64px); font-weight: 900; line-height: 1.02; letter-spacing: -0.04em; color: var(--navy); }
 
-  .contact-person-email {
-    font-size: 14px; font-weight: 500; color: var(--gray-dark);
-    transition: color 0.2s;
-  }
-  .contact-person-email:hover { color: var(--blue); }
+  .contact-us-sub { font-size: 15px; font-weight: 500; line-height: 1.7; color: var(--gray-dark); max-width: 420px; }
 
   /* Form */
   .contact-form-wrap {
@@ -163,7 +131,8 @@ const specialists = [
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
   .contact-form input,
-  .contact-form textarea {
+  .contact-form textarea,
+  .contact-form select {
     width: 100%;
     background: var(--gray-light);
     border: 1px solid var(--gray-card);
@@ -179,7 +148,21 @@ const specialists = [
   .contact-form input::placeholder,
   .contact-form textarea::placeholder { color: var(--gray-dark); }
   .contact-form input:focus,
-  .contact-form textarea:focus { border-color: var(--blue); }
+  .contact-form textarea:focus,
+  .contact-form select:focus { border-color: var(--blue); }
+
+  .contact-form select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'><path d='M1 1.5L6 6.5L11 1.5' stroke='%231a3447' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 40px;
+    cursor: pointer;
+  }
+  .contact-form select:invalid { color: var(--gray-dark); }
+  .contact-form select option { color: var(--navy); }
+  .contact-form select option[disabled] { color: var(--gray-dark); }
 
   .contact-form textarea { resize: vertical; min-height: 120px; }
 
@@ -225,13 +208,12 @@ const specialists = [
   }
 
   @media (max-width: 1024px) {
-    .contact-us-body { grid-template-columns: 1fr; }
-    .contact-us-header { align-items: flex-start; margin-bottom: 48px; }
+    .contact-us-body { grid-template-columns: 1fr; gap: 40px; }
+    .contact-us-intro { position: static; padding-top: 0; }
   }
 
   @media (max-width: 767px) {
     .contact-us { padding: 60px 0; }
-    .contact-us-header { margin-bottom: 36px; }
     .contact-us-sub { max-width: 100%; }
     .form-row { grid-template-columns: 1fr; }
     .contact-form-wrap { padding: 24px; }
