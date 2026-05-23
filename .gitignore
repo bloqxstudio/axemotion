@@ -13,3 +13,6 @@ dist/
 # Claude
 .claude/
 .agents/
+
+# Local archive (legacy files, briefing, playground HTMLs)
+_archive/
