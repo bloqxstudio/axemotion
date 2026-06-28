@@ -4,8 +4,8 @@
 
 <!-- Language Pill -->
 <div class="lang-pill">
-  <button data-lang-btn="en" aria-pressed="true">🇺🇸</button>
-  <button data-lang-btn="pt-BR" aria-pressed="false">🇧🇷</button>
+  <button data-lang-btn="pt-BR" aria-pressed="false">PT</button>
+  <button data-lang-btn="en" aria-pressed="true">EN</button>
 </div>
 
 <!-- Hero Nav -->
@@ -45,14 +45,17 @@
     border-radius: 999px;
     padding: 6px 10px;
     font-size: 14px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.45);
     cursor: pointer;
-    transition: background 0.18s;
+    transition: background 0.18s, color 0.18s;
     line-height: 1;
   }
 
   .lang-pill button.is-active,
   .lang-pill button:hover {
     background: rgba(255,255,255,0.12);
+    color: #fff;
   }
 
   @media (max-width: 767px) {
